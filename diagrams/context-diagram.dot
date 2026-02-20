@@ -1,0 +1,251 @@
+digraph ContextDiagram {
+  // ======== ГЛОБАЛЬНЫЕ НАСТРОЙКИ ========
+  rankdir=LR;
+  bgcolor="#F5F5F5";
+  fontname="Arial";
+  fontsize=11;
+  compound=true;
+  nodesep=0.8;
+  ranksep=3.5;
+  pad=0.5;
+  mindist=3.0;     // минимальное расстояние между узлами
+  nodesep=2.0;     // расстояние между узлами
+  ranksep=5.0;
+
+  // Стили по умолчанию
+  node [fontname="Arial", fontsize=10, penwidth=1.5];
+  edge [fontname="Arial", fontsize=8, penwidth=1.2];
+
+  // ════════════════════════════════════════
+  //  ЦЕНТРАЛЬНАЯ СИСТЕМА (Process 0)
+  // ════════════════════════════════════════
+  Platform [
+    shape=ellipse,
+    style="filled,bold",
+    fillcolor="#B3D9FF",
+    color="#1A5276",
+    penwidth=2.5,
+    width=3.5,
+    height=2.0,
+    label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="2">
+      <TR><TD><B>Платформа документооборота</B></TD></TR>
+      <TR><TD><B>и согласований</B></TD></TR>
+      <TR><TD><FONT POINT-SIZE="8" COLOR="#555555">───────────────</FONT></TD></TR>
+      <TR><TD><FONT POINT-SIZE="7" COLOR="#1A5276">Маршруты · Версии · Подписи</FONT></TD></TR>
+      <TR><TD><FONT POINT-SIZE="7" COLOR="#1A5276">Контроль сроков · Аудит</FONT></TD></TR>
+    </TABLE>>
+  ];
+
+  // ════════════════════════════════════════
+  //  ВНЕШНИЕ СУЩНОСТИ: ЛЮДИ / РОЛИ
+  // ════════════════════════════════════════
+  subgraph cluster_people {
+    label=<<B>👥 Стейкхолдеры (роли)</B>>;
+    labeljust=l;
+    style="dashed";
+    color="#2E86C1";
+    fontname="Arial";
+    fontsize=11;
+    bgcolor="#EBF5FB";
+
+    node [shape=box, style="filled,rounded", fillcolor="#D6EAF8", color="#2E86C1"];
+
+    Initiator   [label=<<TABLE BORDER="0" CELLBORDER="0">
+      <TR><TD>📝 <B>Инициатор</B></TD></TR>
+      <TR><TD><FONT POINT-SIZE="8">Сотрудник-заявитель</FONT></TD></TR>
+    </TABLE>>];
+
+    Approver    [label=<<TABLE BORDER="0" CELLBORDER="0">
+      <TR><TD>✅ <B>Согласующий</B></TD></TR>
+      <TR><TD><FONT POINT-SIZE="8">Руководитель / Заместитель</FONT></TD></TR>
+    </TABLE>>];
+
+    Lawyer      [label=<<TABLE BORDER="0" CELLBORDER="0">
+      <TR><TD>⚖️ <B>Юрист</B></TD></TR>
+      <TR><TD><FONT POINT-SIZE="8">Юридический департамент</FONT></TD></TR>
+    </TABLE>>];
+
+    Accountant  [label=<<TABLE BORDER="0" CELLBORDER="0">
+      <TR><TD>💰 <B>Бухгалтер</B></TD></TR>
+      <TR><TD><FONT POINT-SIZE="8">Финансовый отдел</FONT></TD></TR>
+    </TABLE>>];
+
+    Admin       [label=<<TABLE BORDER="0" CELLBORDER="0">
+      <TR><TD>🔧 <B>Администратор</B></TD></TR>
+      <TR><TD><FONT POINT-SIZE="8">IT / HR-администрирование</FONT></TD></TR>
+    </TABLE>>];
+
+    Counterparty [label=<<TABLE BORDER="0" CELLBORDER="0">
+      <TR><TD>🏢 <B>Контрагент</B></TD></TR>
+      <TR><TD><FONT POINT-SIZE="8">Внешняя организация</FONT></TD></TR>
+    </TABLE>>];
+  }
+
+  // ════════════════════════════════════════
+  //  ВНЕШНИЕ СИСТЕМЫ: БЕЗОПАСНОСТЬ И ИДЕНТИФИКАЦИЯ
+  // ════════════════════════════════════════
+  subgraph cluster_security {
+    label=<<B>🔐 Безопасность и идентификация</B>>;
+    labeljust=l;
+    style="dashed";
+    color="#D4AC0D";
+    fontname="Arial";
+    fontsize=11;
+    bgcolor="#FEF9E7";
+
+    node [shape=box, style="filled", fillcolor="#FCF3CF", color="#D4AC0D"];
+
+    SSO            [label=<<TABLE BORDER="0" CELLBORDER="0">
+      <TR><TD>🔑 <B>Корпоративный SSO</B></TD></TR>
+      <TR><TD><FONT POINT-SIZE="8">Active Directory / LDAP</FONT></TD></TR>
+    </TABLE>>];
+
+    CryptoProvider [label=<<TABLE BORDER="0" CELLBORDER="0">
+      <TR><TD>🛡️ <B>Криптопровайдер / УЦ</B></TD></TR>
+      <TR><TD><FONT POINT-SIZE="8">КЭП / УНЭП, OCSP, TSP</FONT></TD></TR>
+    </TABLE>>];
+  }
+
+  // ════════════════════════════════════════
+  //  ВНЕШНИЕ СИСТЕМЫ: УЧЁТ И СПРАВОЧНИКИ
+  // ════════════════════════════════════════
+  subgraph cluster_business {
+    label=<<B>📊 Учётные системы и справочники</B>>;
+    labeljust=l;
+    style="dashed";
+    color="#27AE60";
+    fontname="Arial";
+    fontsize=11;
+    bgcolor="#EAFAF1";
+
+    node [shape=box, style="filled", fillcolor="#D5F5E3", color="#27AE60"];
+
+    OrgStruct [label=<<TABLE BORDER="0" CELLBORDER="0">
+      <TR><TD>👔 <B>HR-система</B></TD></TR>
+      <TR><TD><FONT POINT-SIZE="8">Оргструктура, роли, замещения</FONT></TD></TR>
+    </TABLE>>];
+
+    ERP       [label=<<TABLE BORDER="0" CELLBORDER="0">
+      <TR><TD>📈 <B>ERP / Фин. система</B></TD></TR>
+      <TR><TD><FONT POINT-SIZE="8">Бюджеты, лимиты, контрагенты</FONT></TD></TR>
+    </TABLE>>];
+
+    Regulator [label=<<TABLE BORDER="0" CELLBORDER="0">
+      <TR><TD>🏛️ <B>Регулятор / Аудитор</B></TD></TR>
+      <TR><TD><FONT POINT-SIZE="8">ФНС, внешний аудит</FONT></TD></TR>
+    </TABLE>>];
+  }
+
+  // ════════════════════════════════════════
+  //  ВНЕШНИЕ СИСТЕМЫ: ИНФРАСТРУКТУРА
+  // ════════════════════════════════════════
+  subgraph cluster_infra {
+    label=<<B>🖥️ Инфраструктурные сервисы</B>>;
+    labeljust=l;
+    style="dashed";
+    color="#E67E22";
+    fontname="Arial";
+    fontsize=11;
+    bgcolor="#FDF2E9";
+
+    node [shape=box, style="filled", fillcolor="#FDEBD0", color="#E67E22"];
+
+    DocStorage [label=<<TABLE BORDER="0" CELLBORDER="0">
+      <TR><TD>📂 <B>Хранилище документов</B></TD></TR>
+      <TR><TD><FONT POINT-SIZE="8">Версионное хранилище (VCS)</FONT></TD></TR>
+    </TABLE>>];
+
+    Notifier   [label=<<TABLE BORDER="0" CELLBORDER="0">
+      <TR><TD>📧 <B>Шлюз уведомлений</B></TD></TR>
+      <TR><TD><FONT POINT-SIZE="8">Email / Push / SMS</FONT></TD></TR>
+    </TABLE>>];
+
+    Archive    [label=<<TABLE BORDER="0" CELLBORDER="0">
+      <TR><TD>🗄️ <B>Долговременный архив</B></TD></TR>
+      <TR><TD><FONT POINT-SIZE="8">ФЗ-125, хранение 5+ лет</FONT></TD></TR>
+    </TABLE>>];
+
+    EDO        [label=<<TABLE BORDER="0" CELLBORDER="0">
+      <TR><TD>📨 <B>Оператор ЭДО</B></TD></TR>
+      <TR><TD><FONT POINT-SIZE="8">Роуминг, юр. обмен</FONT></TD></TR>
+    </TABLE>>];
+  }
+
+
+  // ════════════════════════════════════════
+  //  ПОТОКИ ДАННЫХ: ЛЮДИ ↔ ПЛАТФОРМА
+  // ════════════════════════════════════════
+  edge [color="#2E86C1", fontcolor="#1B4F72"];
+
+  // Инициатор
+  Initiator -> Platform [label="  Создание/загрузка документа\l  Реквизиты (контрагент, сумма, статья)\l"];
+  Platform -> Initiator [label="  Статус согласования\l  Задача на доработку\l  Уведомление о подписи/отказе\l"];
+
+  // Согласующий
+  Approver -> Platform [label="  Решение: Согласовать / Отклонить\l  Подписание КЭП/УНЭП\l  Делегирование заместителю\l"];
+  Platform -> Approver [label="  Задача на согласование\l  Напоминание (SLA)\l  Предупреждение о конфликте версий\l"];
+
+  // Юрист
+  Lawyer -> Platform [label="  Правовая экспертиза (виза/отказ)\l  Загрузка отредакт. версии\l"];
+  Platform -> Lawyer [label="  Задача на визирование\l  Уведомление о новой версии\l"];
+
+  // Бухгалтер
+  Accountant -> Platform [label="  Проверка реквизитов и лимитов\l  Виза на оплату\l  Ручной ввод (деградация)\l"];
+  Platform -> Accountant [label="  Задача на проверку\l  Превышение лимита ⚠️\l"];
+
+  // Администратор
+  Admin -> Platform [label="  Настройка маршрутов/шаблонов\l  Управление RBAC\l  Просмотр аудита\l"];
+  Platform -> Admin [label="  Журнал аудита (immutable)\l  Метрики SLA\l  Алерты безопасности\l"];
+
+  // Контрагент (через ЭДО)
+  Counterparty -> Platform [label="  Подписанный документ (встречная КЭП)\l  Комментарии/протокол разногласий\l", style=dashed];
+  Platform -> Counterparty [label="  Документ на подпись (через ЭДО)\l  Статус согласования\l", style=dashed];
+
+  // ════════════════════════════════════════
+  //  ПОТОКИ ДАННЫХ: ПЛАТФОРМА ↔ СИСТЕМЫ
+  // ════════════════════════════════════════
+
+  // --- Безопасность (жёлтые) ---
+  edge [color="#D4AC0D", fontcolor="#7D6608"];
+
+  Platform -> SSO [label="  Запрос аутентификации\l  Проверка сессии\l"];
+  SSO -> Platform [label="  Токен + роли + группы\l  Статус учётной записи\l"];
+
+  Platform -> CryptoProvider [label="  Хеш документа → подпись КЭП/УНЭП\l  Проверка сертификата (OCSP)\l  Запрос метки времени (TSP)\l"];
+  CryptoProvider -> Platform [label="  Подписанный хеш + штамп времени\l  Статус сертификата\l"];
+
+  // --- Учётные системы (зелёные) ---
+  edge [color="#27AE60", fontcolor="#1E8449"];
+
+  Platform -> OrgStruct [label="  Запрос иерархии\l  Поиск роли (юрист, CFO)\l  Проверка замещений\l"];
+  OrgStruct -> Platform [label="  Оргструктура\l  Руководители и заместители\l"];
+
+  Platform -> ERP [label="  Остаток бюджета по статье\l  Проверка лимитов\l  Реквизиты контрагента\l"];
+  ERP -> Platform [label="  Данные по лимитам\l  Статус контрагента\l  Подтверждение резервирования\l"];
+
+  Platform -> Regulator [label="  Выгрузка аудита по запросу\l  Отчётность (формы)\l", style=dashed];
+  Regulator -> Platform [label="  Запрос на предоставление документов\l", style=dashed];
+
+  // --- Инфраструктура (оранжевые) ---
+  edge [color="#E67E22", fontcolor="#A04000"];
+
+  Platform -> DocStorage [label="  Сохранение версии (файл + хеш)\l  Запрос по ID/версии\l"];
+  DocStorage -> Platform [label="  Файл + метаданные\l  История версий\l"];
+
+  Platform -> Notifier [label="  Событие → адресат + канал\l  (задача / напоминание / эскалация)\l"];
+  Notifier -> Platform [label="  Статус доставки\l"];
+
+  Platform -> Archive [label="  Передача завершённых дел\l  Файл + подписи + метаданные\l"];
+  Archive -> Platform [label="  Документ из архива (по запросу)\l"];
+
+  Platform -> EDO [label="  Исходящий документ → контрагенту\l  Запрос статуса обмена\l"];
+  EDO -> Platform [label="  Входящий документ от контрагента\l  Квитанция о доставке\l"];
+
+  // ════════════════════════════════════════
+  //  FALLBACK / ДЕГРАДАЦИЯ (пунктир красный)
+  // ════════════════════════════════════════
+  edge [color="#C0392B", fontcolor="#922B21", style=dashed, penwidth=1.0];
+
+  Accountant -> Platform [label="  ⚠️ Ручной ввод лимитов\l  (при недоступности ERP)\l", constraint=false];
+  Admin -> Platform [label="  ⚠️ Ручная аутентификация\l  (при недоступности SSO)\l", constraint=false];
+}

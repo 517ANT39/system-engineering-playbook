@@ -1,0 +1,399 @@
+<svg width="1831pt" height="1756pt" viewBox="0.00 0.00 1831.00 1756.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(36 1719.6)">
+<title>ContextDiagram</title>
+<polygon fill="#f5f5f5" stroke="none" points="-36,36 -36,-1719.6 1794.78,-1719.6 1794.78,36 -36,36"/>
+<!-- Platform -->
+<g id="node1" class="node">
+<title>Platform</title>
+<ellipse fill="#b3d9ff" stroke="#1a5276" stroke-width="2.5" cx="883.07" cy="-840.37" rx="126" ry="72"/>
+<text xml:space="preserve" text-anchor="start" x="812.23" y="-869.57" font-family="Arial" font-weight="bold" font-size="10.00">Платформа документооборота</text>
+<text xml:space="preserve" text-anchor="start" x="845.57" y="-851.57" font-family="Arial" font-weight="bold" font-size="10.00">и согласований</text>
+<text xml:space="preserve" text-anchor="start" x="833.06" y="-834.37" font-family="Arial" font-size="8.00" fill="#555555">───────────────</text>
+<text xml:space="preserve" text-anchor="start" x="834.45" y="-819.67" font-family="Arial" font-size="7.00" fill="#1a5276">Маршруты · Версии · Подписи</text>
+<text xml:space="preserve" text-anchor="start" x="841.26" y="-805.27" font-family="Arial" font-size="7.00" fill="#1a5276">Контроль сроков · Аудит</text>
+</g>
+<!-- Initiator -->
+<g id="node2" class="node">
+<title>Initiator</title>
+<path fill="#d6eaf8" stroke="#2e86c1" stroke-width="1.5" d="M1746.78,-862.17C1746.78,-862.17 1664.1,-862.17 1664.1,-862.17 1658.1,-862.17 1652.1,-856.17 1652.1,-850.17 1652.1,-850.17 1652.1,-830.57 1652.1,-830.57 1652.1,-824.57 1658.1,-818.57 1664.1,-818.57 1664.1,-818.57 1746.78,-818.57 1746.78,-818.57 1752.78,-818.57 1758.78,-824.57 1758.78,-830.57 1758.78,-830.57 1758.78,-850.17 1758.78,-850.17 1758.78,-856.17 1752.78,-862.17 1746.78,-862.17"/>
+<text xml:space="preserve" text-anchor="start" x="1673.49" y="-846.17" font-family="Arial" font-size="10.00">📝 </text>
+<text xml:space="preserve" text-anchor="start" x="1687.38" y="-846.17" font-family="Arial" font-weight="bold" font-size="10.00">Инициатор</text>
+<text xml:space="preserve" text-anchor="start" x="1664.1" y="-828.97" font-family="Arial" font-size="8.00">Сотрудник-заявитель</text>
+</g>
+<!-- Platform&#45;&gt;Initiator -->
+<g id="edge2" class="edge">
+<title>Platform-&gt;Initiator</title>
+<path fill="none" stroke="#2e86c1" stroke-width="1.2" d="M991.43,-878.33C1174.8,-903.22 1538.48,-899.13 1662.7,-866.08"/>
+<polygon fill="#2e86c1" stroke="#2e86c1" stroke-width="1.2" points="1663.59,-869.47 1672.21,-863.3 1661.63,-862.75 1663.59,-869.47"/>
+<text xml:space="preserve" text-anchor="start" x="1204.82" y="-893.81" font-family="Arial" font-size="8.00" fill="#1b4f72">  Статус согласования</text>
+<text xml:space="preserve" text-anchor="start" x="1204.82" y="-884.21" font-family="Arial" font-size="8.00" fill="#1b4f72">  Задача на доработку</text>
+<text xml:space="preserve" text-anchor="start" x="1204.82" y="-874.61" font-family="Arial" font-size="8.00" fill="#1b4f72">  Уведомление о подписи/отказе</text>
+</g>
+<!-- Approver -->
+<g id="node3" class="node">
+<title>Approver</title>
+<path fill="#d6eaf8" stroke="#2e86c1" stroke-width="1.5" d="M1692.29,-1188.71C1692.29,-1188.71 1583.38,-1188.71 1583.38,-1188.71 1577.38,-1188.71 1571.38,-1182.71 1571.38,-1176.71 1571.38,-1176.71 1571.38,-1157.11 1571.38,-1157.11 1571.38,-1151.11 1577.38,-1145.11 1583.38,-1145.11 1583.38,-1145.11 1692.29,-1145.11 1692.29,-1145.11 1698.29,-1145.11 1704.29,-1151.11 1704.29,-1157.11 1704.29,-1157.11 1704.29,-1176.71 1704.29,-1176.71 1704.29,-1182.71 1698.29,-1188.71 1692.29,-1188.71"/>
+<text xml:space="preserve" text-anchor="start" x="1601.71" y="-1172.71" font-family="Arial" font-size="10.00">✅ </text>
+<text xml:space="preserve" text-anchor="start" x="1612.83" y="-1172.71" font-family="Arial" font-weight="bold" font-size="10.00">Согласующий</text>
+<text xml:space="preserve" text-anchor="start" x="1583.38" y="-1155.51" font-family="Arial" font-size="8.00">Руководитель / Заместитель</text>
+</g>
+<!-- Platform&#45;&gt;Approver -->
+<g id="edge4" class="edge">
+<title>Platform-&gt;Approver</title>
+<path fill="none" stroke="#2e86c1" stroke-width="1.2" d="M945.05,-904.24C1082.13,-993.25 1408.1,-1133.6 1559.22,-1167.92"/>
+<polygon fill="#2e86c1" stroke="#2e86c1" stroke-width="1.2" points="1558.38,-1171.32 1568.89,-1170 1559.85,-1164.48 1558.38,-1171.32"/>
+<text xml:space="preserve" text-anchor="start" x="1107.66" y="-1057.68" font-family="Arial" font-size="8.00" fill="#1b4f72">  Задача на согласование</text>
+<text xml:space="preserve" text-anchor="start" x="1107.66" y="-1048.08" font-family="Arial" font-size="8.00" fill="#1b4f72">  Напоминание (SLA)</text>
+<text xml:space="preserve" text-anchor="start" x="1107.66" y="-1038.48" font-family="Arial" font-size="8.00" fill="#1b4f72">  Предупреждение о конфликте версий</text>
+</g>
+<!-- Lawyer -->
+<g id="node4" class="node">
+<title>Lawyer</title>
+<path fill="#d6eaf8" stroke="#2e86c1" stroke-width="1.5" d="M1489.78,-1467.46C1489.78,-1467.46 1389.76,-1467.46 1389.76,-1467.46 1383.76,-1467.46 1377.76,-1461.46 1377.76,-1455.46 1377.76,-1455.46 1377.76,-1435.86 1377.76,-1435.86 1377.76,-1429.86 1383.76,-1423.86 1389.76,-1423.86 1389.76,-1423.86 1489.78,-1423.86 1489.78,-1423.86 1495.78,-1423.86 1501.78,-1429.86 1501.78,-1435.86 1501.78,-1435.86 1501.78,-1455.46 1501.78,-1455.46 1501.78,-1461.46 1495.78,-1467.46 1489.78,-1467.46"/>
+<text xml:space="preserve" text-anchor="start" x="1416.15" y="-1451.46" font-family="Arial" font-size="10.00">⚖️ </text>
+<text xml:space="preserve" text-anchor="start" x="1435.6" y="-1451.46" font-family="Arial" font-weight="bold" font-size="10.00">Юрист</text>
+<text xml:space="preserve" text-anchor="start" x="1389.76" y="-1434.26" font-family="Arial" font-size="8.00">Юридический департамент</text>
+</g>
+<!-- Platform&#45;&gt;Lawyer -->
+<g id="edge6" class="edge">
+<title>Platform-&gt;Lawyer</title>
+<path fill="none" stroke="#2e86c1" stroke-width="1.2" d="M906.35,-912.3C989.23,-1046.62 1243.29,-1322.85 1370.14,-1416.55"/>
+<polygon fill="#2e86c1" stroke="#2e86c1" stroke-width="1.2" points="1367.79,-1419.17 1377.95,-1422.17 1371.88,-1413.49 1367.79,-1419.17"/>
+<text xml:space="preserve" text-anchor="start" x="1024.89" y="-1176.42" font-family="Arial" font-size="8.00" fill="#1b4f72">  Задача на визирование</text>
+<text xml:space="preserve" text-anchor="start" x="1024.89" y="-1166.82" font-family="Arial" font-size="8.00" fill="#1b4f72">  Уведомление о новой версии</text>
+</g>
+<!-- Accountant -->
+<g id="node5" class="node">
+<title>Accountant</title>
+<path fill="#d6eaf8" stroke="#2e86c1" stroke-width="1.5" d="M1198.78,-1634.94C1198.78,-1634.94 1129.88,-1634.94 1129.88,-1634.94 1123.88,-1634.94 1117.88,-1628.94 1117.88,-1622.94 1117.88,-1622.94 1117.88,-1603.34 1117.88,-1603.34 1117.88,-1597.34 1123.88,-1591.34 1129.88,-1591.34 1129.88,-1591.34 1198.78,-1591.34 1198.78,-1591.34 1204.78,-1591.34 1210.78,-1597.34 1210.78,-1603.34 1210.78,-1603.34 1210.78,-1622.94 1210.78,-1622.94 1210.78,-1628.94 1204.78,-1634.94 1198.78,-1634.94"/>
+<text xml:space="preserve" text-anchor="start" x="1132.38" y="-1618.94" font-family="Arial" font-size="10.00">💰 </text>
+<text xml:space="preserve" text-anchor="start" x="1146.27" y="-1618.94" font-family="Arial" font-weight="bold" font-size="10.00">Бухгалтер</text>
+<text xml:space="preserve" text-anchor="start" x="1129.88" y="-1601.74" font-family="Arial" font-size="8.00">Финансовый отдел</text>
+</g>
+<!-- Platform&#45;&gt;Accountant -->
+<g id="edge8" class="edge">
+<title>Platform-&gt;Accountant</title>
+<path fill="none" stroke="#2e86c1" stroke-width="1.2" d="M848.01,-910.55C834.44,-1081.35 990.71,-1501.22 1107.87,-1596.12"/>
+<polygon fill="#2e86c1" stroke="#2e86c1" stroke-width="1.2" points="1105.73,-1598.88 1115.84,-1602.02 1109.89,-1593.26 1105.73,-1598.88"/>
+<text xml:space="preserve" text-anchor="start" x="884.59" y="-1265.33" font-family="Arial" font-size="8.00" fill="#1b4f72">  Задача на проверку</text>
+<text xml:space="preserve" text-anchor="start" x="884.59" y="-1255.73" font-family="Arial" font-size="8.00" fill="#1b4f72">  Превышение лимита ⚠️</text>
+</g>
+<!-- Admin -->
+<g id="node6" class="node">
+<title>Admin</title>
+<path fill="#d6eaf8" stroke="#2e86c1" stroke-width="1.5" d="M895.69,-1683.6C895.69,-1683.6 792.12,-1683.6 792.12,-1683.6 786.12,-1683.6 780.12,-1677.6 780.12,-1671.6 780.12,-1671.6 780.12,-1652 780.12,-1652 780.12,-1646 786.12,-1640 792.12,-1640 792.12,-1640 895.69,-1640 895.69,-1640 901.69,-1640 907.69,-1646 907.69,-1652 907.69,-1652 907.69,-1671.6 907.69,-1671.6 907.69,-1677.6 901.69,-1683.6 895.69,-1683.6"/>
+<text xml:space="preserve" text-anchor="start" x="800.84" y="-1667.6" font-family="Arial" font-size="10.00">🔧 </text>
+<text xml:space="preserve" text-anchor="start" x="814.73" y="-1667.6" font-family="Arial" font-weight="bold" font-size="10.00">Администратор</text>
+<text xml:space="preserve" text-anchor="start" x="792.12" y="-1650.4" font-family="Arial" font-size="8.00">IT / HR-администрирование</text>
+</g>
+<!-- Platform&#45;&gt;Admin -->
+<g id="edge10" class="edge">
+<title>Platform-&gt;Admin</title>
+<path fill="none" stroke="#2e86c1" stroke-width="1.2" d="M817.97,-903.24C743.17,-1067.99 728.3,-1507.68 801.6,-1629.92"/>
+<polygon fill="#2e86c1" stroke="#2e86c1" stroke-width="1.2" points="798.51,-1631.59 806.99,-1637.95 804.33,-1627.7 798.51,-1631.59"/>
+<text xml:space="preserve" text-anchor="start" x="705.32" y="-1288.18" font-family="Arial" font-size="8.00" fill="#1b4f72">  Журнал аудита (immutable)</text>
+<text xml:space="preserve" text-anchor="start" x="705.32" y="-1278.58" font-family="Arial" font-size="8.00" fill="#1b4f72">  Метрики SLA</text>
+<text xml:space="preserve" text-anchor="start" x="705.32" y="-1268.98" font-family="Arial" font-size="8.00" fill="#1b4f72">  Алерты безопасности</text>
+</g>
+<!-- Counterparty -->
+<g id="node7" class="node">
+<title>Counterparty</title>
+<path fill="#d6eaf8" stroke="#2e86c1" stroke-width="1.5" d="M564.67,-1601.78C564.67,-1601.78 482.43,-1601.78 482.43,-1601.78 476.43,-1601.78 470.43,-1595.78 470.43,-1589.78 470.43,-1589.78 470.43,-1570.18 470.43,-1570.18 470.43,-1564.18 476.43,-1558.18 482.43,-1558.18 482.43,-1558.18 564.67,-1558.18 564.67,-1558.18 570.67,-1558.18 576.67,-1564.18 576.67,-1570.18 576.67,-1570.18 576.67,-1589.78 576.67,-1589.78 576.67,-1595.78 570.67,-1601.78 564.67,-1601.78"/>
+<text xml:space="preserve" text-anchor="start" x="488.82" y="-1585.78" font-family="Arial" font-size="10.00">🏢 </text>
+<text xml:space="preserve" text-anchor="start" x="502.71" y="-1585.78" font-family="Arial" font-weight="bold" font-size="10.00">Контрагент</text>
+<text xml:space="preserve" text-anchor="start" x="482.43" y="-1568.58" font-family="Arial" font-size="8.00">Внешняя организация</text>
+</g>
+<!-- Platform&#45;&gt;Counterparty -->
+<g id="edge12" class="edge">
+<title>Platform-&gt;Counterparty</title>
+<path fill="none" stroke="#2e86c1" stroke-width="1.2" stroke-dasharray="5,2" d="M814.74,-901.98C708.61,-1052.06 530.52,-1428.58 516.65,-1545.69"/>
+<polygon fill="#2e86c1" stroke="#2e86c1" stroke-width="1.2" points="513.16,-1545.39 515.93,-1555.62 520.14,-1545.9 513.16,-1545.39"/>
+<text xml:space="preserve" text-anchor="start" x="535.9" y="-1235.84" font-family="Arial" font-size="8.00" fill="#1b4f72">  Документ на подпись (через ЭДО)</text>
+<text xml:space="preserve" text-anchor="start" x="535.9" y="-1226.24" font-family="Arial" font-size="8.00" fill="#1b4f72">  Статус согласования</text>
+</g>
+<!-- SSO -->
+<g id="node8" class="node">
+<title>SSO</title>
+<polygon fill="#fcf3cf" stroke="#d4ac0d" stroke-width="1.5" points="326.22,-1397.96 192.2,-1397.96 192.2,-1354.36 326.22,-1354.36 326.22,-1397.96"/>
+<text xml:space="preserve" text-anchor="start" x="204.2" y="-1381.96" font-family="Arial" font-size="10.00">🔑 </text>
+<text xml:space="preserve" text-anchor="start" x="218.09" y="-1381.96" font-family="Arial" font-weight="bold" font-size="10.00">Корпоративный SSO</text>
+<text xml:space="preserve" text-anchor="start" x="217.42" y="-1364.76" font-family="Arial" font-size="8.00">Active Directory / LDAP</text>
+</g>
+<!-- Platform&#45;&gt;SSO -->
+<g id="edge13" class="edge">
+<title>Platform-&gt;SSO</title>
+<path fill="none" stroke="#d4ac0d" stroke-width="1.2" d="M777.57,-881.24C615,-986.11 320.96,-1246.12 265.76,-1343.24"/>
+<polygon fill="#d4ac0d" stroke="#d4ac0d" stroke-width="1.2" points="262.66,-1341.61 261.28,-1352.11 268.91,-1344.76 262.66,-1341.61"/>
+<text xml:space="preserve" text-anchor="start" x="426.09" y="-1124.24" font-family="Arial" font-size="8.00" fill="#7d6608">  Запрос аутентификации</text>
+<text xml:space="preserve" text-anchor="start" x="426.09" y="-1114.64" font-family="Arial" font-size="8.00" fill="#7d6608">  Проверка сессии</text>
+</g>
+<!-- CryptoProvider -->
+<g id="node9" class="node">
+<title>CryptoProvider</title>
+<polygon fill="#fcf3cf" stroke="#d4ac0d" stroke-width="1.5" points="166.09,-1085.35 17.06,-1085.35 17.06,-1041.75 166.09,-1041.75 166.09,-1085.35"/>
+<text xml:space="preserve" text-anchor="start" x="29.06" y="-1069.35" font-family="Arial" font-size="10.00">🛡️ </text>
+<text xml:space="preserve" text-anchor="start" x="51.29" y="-1069.35" font-family="Arial" font-weight="bold" font-size="10.00">Криптопровайдер / УЦ</text>
+<text xml:space="preserve" text-anchor="start" x="49.12" y="-1052.15" font-family="Arial" font-size="8.00">КЭП / УНЭП, OCSP, TSP</text>
+</g>
+<!-- Platform&#45;&gt;CryptoProvider -->
+<g id="edge15" class="edge">
+<title>Platform-&gt;CryptoProvider</title>
+<path fill="none" stroke="#d4ac0d" stroke-width="1.2" d="M756.41,-835.01C563.45,-864.5 208.93,-970.53 114.72,-1034.14"/>
+<polygon fill="#d4ac0d" stroke="#d4ac0d" stroke-width="1.2" points="112.69,-1031.29 106.71,-1040.03 116.84,-1036.93 112.69,-1031.29"/>
+<text xml:space="preserve" text-anchor="start" x="297.76" y="-956.17" font-family="Arial" font-size="8.00" fill="#7d6608">  Хеш документа → подпись КЭП/УНЭП</text>
+<text xml:space="preserve" text-anchor="start" x="297.76" y="-946.57" font-family="Arial" font-size="8.00" fill="#7d6608">  Проверка сертификата (OCSP)</text>
+<text xml:space="preserve" text-anchor="start" x="297.76" y="-936.97" font-family="Arial" font-size="8.00" fill="#7d6608">  Запрос метки времени (TSP)</text>
+</g>
+<!-- OrgStruct -->
+<g id="node10" class="node">
+<title>OrgStruct</title>
+<polygon fill="#d5f5e3" stroke="#27ae60" stroke-width="1.5" points="144.02,-726.29 0,-726.29 0,-682.69 144.02,-682.69 144.02,-726.29"/>
+<text xml:space="preserve" text-anchor="start" x="36.73" y="-710.29" font-family="Arial" font-size="10.00">👔 </text>
+<text xml:space="preserve" text-anchor="start" x="50.62" y="-710.29" font-family="Arial" font-weight="bold" font-size="10.00">HR-система</text>
+<text xml:space="preserve" text-anchor="start" x="12" y="-693.09" font-family="Arial" font-size="8.00">Оргструктура, роли, замещения</text>
+</g>
+<!-- Platform&#45;&gt;OrgStruct -->
+<g id="edge17" class="edge">
+<title>Platform-&gt;OrgStruct</title>
+<path fill="none" stroke="#27ae60" stroke-width="1.2" d="M793.65,-788.56C635.87,-737.34 310.51,-683.75 156.39,-684.54"/>
+<polygon fill="#27ae60" stroke="#27ae60" stroke-width="1.2" points="156.46,-681.04 146.51,-684.69 156.56,-688.04 156.46,-681.04"/>
+<text xml:space="preserve" text-anchor="start" x="377.23" y="-758.15" font-family="Arial" font-size="8.00" fill="#1e8449">  Запрос иерархии</text>
+<text xml:space="preserve" text-anchor="start" x="377.23" y="-748.55" font-family="Arial" font-size="8.00" fill="#1e8449">  Поиск роли (юрист, CFO)</text>
+<text xml:space="preserve" text-anchor="start" x="377.23" y="-738.95" font-family="Arial" font-size="8.00" fill="#1e8449">  Проверка замещений</text>
+</g>
+<!-- ERP -->
+<g id="node11" class="node">
+<title>ERP</title>
+<polygon fill="#d5f5e3" stroke="#27ae60" stroke-width="1.5" points="274.63,-397.1 135.06,-397.1 135.06,-353.5 274.63,-353.5 274.63,-397.1"/>
+<text xml:space="preserve" text-anchor="start" x="152.89" y="-381.1" font-family="Arial" font-size="10.00">📈 </text>
+<text xml:space="preserve" text-anchor="start" x="166.78" y="-381.1" font-family="Arial" font-weight="bold" font-size="10.00">ERP / Фин. система</text>
+<text xml:space="preserve" text-anchor="start" x="147.06" y="-363.9" font-family="Arial" font-size="8.00">Бюджеты, лимиты, контрагенты</text>
+</g>
+<!-- Platform&#45;&gt;ERP -->
+<g id="edge19" class="edge">
+<title>Platform-&gt;ERP</title>
+<path fill="none" stroke="#27ae60" stroke-width="1.2" d="M840.41,-771.61C728.1,-660.08 431.4,-456.51 285.85,-390.99"/>
+<polygon fill="#27ae60" stroke="#27ae60" stroke-width="1.2" points="287.44,-387.86 276.87,-387.06 284.63,-394.27 287.44,-387.86"/>
+<text xml:space="preserve" text-anchor="start" x="454.22" y="-574.1" font-family="Arial" font-size="8.00" fill="#1e8449">  Остаток бюджета по статье</text>
+<text xml:space="preserve" text-anchor="start" x="454.22" y="-564.5" font-family="Arial" font-size="8.00" fill="#1e8449">  Проверка лимитов</text>
+<text xml:space="preserve" text-anchor="start" x="454.22" y="-554.9" font-family="Arial" font-size="8.00" fill="#1e8449">  Реквизиты контрагента</text>
+</g>
+<!-- Regulator -->
+<g id="node12" class="node">
+<title>Regulator</title>
+<polygon fill="#d5f5e3" stroke="#27ae60" stroke-width="1.5" points="535.55,-154.7 392.08,-154.7 392.08,-111.1 535.55,-111.1 535.55,-154.7"/>
+<text xml:space="preserve" text-anchor="start" x="404.08" y="-138.7" font-family="Arial" font-size="10.00">🏛️ </text>
+<text xml:space="preserve" text-anchor="start" x="426.31" y="-138.7" font-family="Arial" font-weight="bold" font-size="10.00">Регулятор / Аудитор</text>
+<text xml:space="preserve" text-anchor="start" x="427.14" y="-121.5" font-family="Arial" font-size="8.00">ФНС, внешний аудит</text>
+</g>
+<!-- Platform&#45;&gt;Regulator -->
+<g id="edge21" class="edge">
+<title>Platform-&gt;Regulator</title>
+<path fill="none" stroke="#27ae60" stroke-width="1.2" stroke-dasharray="5,2" d="M876.04,-767.52C822.05,-614.59 616.76,-270.13 514.64,-163.56"/>
+<polygon fill="#27ae60" stroke="#27ae60" stroke-width="1.2" points="517.38,-161.35 507.85,-156.72 512.41,-166.29 517.38,-161.35"/>
+<text xml:space="preserve" text-anchor="start" x="581.99" y="-477.54" font-family="Arial" font-size="8.00" fill="#1e8449">  Выгрузка аудита по запросу</text>
+<text xml:space="preserve" text-anchor="start" x="581.99" y="-467.94" font-family="Arial" font-size="8.00" fill="#1e8449">  Отчётность (формы)</text>
+</g>
+<!-- DocStorage -->
+<g id="node13" class="node">
+<title>DocStorage</title>
+<polygon fill="#fdebd0" stroke="#e67e22" stroke-width="1.5" points="877.23,-43.6 730.99,-43.6 730.99,0 877.23,0 877.23,-43.6"/>
+<text xml:space="preserve" text-anchor="start" x="742.99" y="-27.6" font-family="Arial" font-size="10.00">📂 </text>
+<text xml:space="preserve" text-anchor="start" x="756.88" y="-27.6" font-family="Arial" font-weight="bold" font-size="10.00">Хранилище документов</text>
+<text xml:space="preserve" text-anchor="start" x="748.77" y="-10.4" font-family="Arial" font-size="8.00">Версионное хранилище (VCS)</text>
+</g>
+<!-- Platform&#45;&gt;DocStorage -->
+<g id="edge23" class="edge">
+<title>Platform-&gt;DocStorage</title>
+<path fill="none" stroke="#e67e22" stroke-width="1.2" d="M907.93,-768.59C923.95,-598.47 880.53,-176.09 831.06,-54.8"/>
+<polygon fill="#e67e22" stroke="#e67e22" stroke-width="1.2" points="834.26,-53.39 826.99,-45.68 827.87,-56.24 834.26,-53.39"/>
+<text xml:space="preserve" text-anchor="start" x="743.92" y="-423.7" font-family="Arial" font-size="8.00" fill="#a04000">  Сохранение версии (файл + хеш)</text>
+<text xml:space="preserve" text-anchor="start" x="743.92" y="-414.1" font-family="Arial" font-size="8.00" fill="#a04000">  Запрос по ID/версии</text>
+</g>
+<!-- Notifier -->
+<g id="node14" class="node">
+<title>Notifier</title>
+<polygon fill="#fdebd0" stroke="#e67e22" stroke-width="1.5" points="1212.19,-84.39 1088.18,-84.39 1088.18,-40.79 1212.19,-40.79 1212.19,-84.39"/>
+<text xml:space="preserve" text-anchor="start" x="1100.18" y="-68.39" font-family="Arial" font-size="10.00">📧 </text>
+<text xml:space="preserve" text-anchor="start" x="1114.07" y="-68.39" font-family="Arial" font-weight="bold" font-size="10.00">Шлюз уведомлений</text>
+<text xml:space="preserve" text-anchor="start" x="1115.73" y="-51.19" font-family="Arial" font-size="8.00">Email / Push / SMS</text>
+</g>
+<!-- Platform&#45;&gt;Notifier -->
+<g id="edge25" class="edge">
+<title>Platform-&gt;Notifier</title>
+<path fill="none" stroke="#e67e22" stroke-width="1.2" d="M941.04,-775.32C1027.92,-616.75 1160.99,-216.75 1161.2,-96.66"/>
+<polygon fill="#e67e22" stroke="#e67e22" stroke-width="1.2" points="1164.7,-96.65 1160.79,-86.8 1157.71,-96.94 1164.7,-96.65"/>
+<text xml:space="preserve" text-anchor="start" x="912.43" y="-447.99" font-family="Arial" font-size="8.00" fill="#a04000">  Событие → адресат + канал</text>
+<text xml:space="preserve" text-anchor="start" x="912.43" y="-438.39" font-family="Arial" font-size="8.00" fill="#a04000">  (задача / напоминание / эскалация)</text>
+</g>
+<!-- Archive -->
+<g id="node15" class="node">
+<title>Archive</title>
+<polygon fill="#fdebd0" stroke="#e67e22" stroke-width="1.5" points="1528.61,-267.7 1374.03,-267.7 1374.03,-224.1 1528.61,-224.1 1528.61,-267.7"/>
+<text xml:space="preserve" text-anchor="start" x="1386.03" y="-251.7" font-family="Arial" font-size="10.00">🗄️ </text>
+<text xml:space="preserve" text-anchor="start" x="1408.26" y="-251.7" font-family="Arial" font-weight="bold" font-size="10.00">Долговременный архив</text>
+<text xml:space="preserve" text-anchor="start" x="1405.41" y="-234.5" font-family="Arial" font-size="8.00">ФЗ-125, хранение 5+ лет</text>
+</g>
+<!-- Platform&#45;&gt;Archive -->
+<g id="edge27" class="edge">
+<title>Platform-&gt;Archive</title>
+<path fill="none" stroke="#e67e22" stroke-width="1.2" d="M979.44,-792.98C1130.15,-674.84 1402.55,-382.02 1448.13,-279.09"/>
+<polygon fill="#e67e22" stroke="#e67e22" stroke-width="1.2" points="1451.29,-280.62 1451.63,-270.03 1444.76,-278.1 1451.29,-280.62"/>
+<text xml:space="preserve" text-anchor="start" x="1097.75" y="-548.03" font-family="Arial" font-size="8.00" fill="#a04000">  Передача завершённых дел</text>
+<text xml:space="preserve" text-anchor="start" x="1097.75" y="-538.43" font-family="Arial" font-size="8.00" fill="#a04000">  Файл + подписи + метаданные</text>
+</g>
+<!-- EDO -->
+<g id="node16" class="node">
+<title>EDO</title>
+<polygon fill="#fdebd0" stroke="#e67e22" stroke-width="1.5" points="1694.77,-549.96 1592.98,-549.96 1592.98,-506.36 1694.77,-506.36 1694.77,-549.96"/>
+<text xml:space="preserve" text-anchor="start" x="1604.98" y="-533.96" font-family="Arial" font-size="10.00">📨 </text>
+<text xml:space="preserve" text-anchor="start" x="1618.87" y="-533.96" font-family="Arial" font-weight="bold" font-size="10.00">Оператор ЭДО</text>
+<text xml:space="preserve" text-anchor="start" x="1608.31" y="-516.76" font-family="Arial" font-size="8.00">Роуминг, юр. обмен</text>
+</g>
+<!-- Platform&#45;&gt;EDO -->
+<g id="edge29" class="edge">
+<title>Platform-&gt;EDO</title>
+<path fill="none" stroke="#e67e22" stroke-width="1.2" d="M1009.1,-831.32C1198.58,-779.73 1542.38,-632.1 1625.93,-558.56"/>
+<polygon fill="#e67e22" stroke="#e67e22" stroke-width="1.2" points="1628.32,-561.12 1633.09,-551.66 1623.46,-556.08 1628.32,-561.12"/>
+<text xml:space="preserve" text-anchor="start" x="1175.26" y="-706.94" font-family="Arial" font-size="8.00" fill="#a04000">  Исходящий документ → контрагенту</text>
+<text xml:space="preserve" text-anchor="start" x="1175.26" y="-697.34" font-family="Arial" font-size="8.00" fill="#a04000">  Запрос статуса обмена</text>
+</g>
+<!-- Initiator&#45;&gt;Platform -->
+<g id="edge1" class="edge">
+<title>Initiator-&gt;Platform</title>
+<path fill="none" stroke="#2e86c1" stroke-width="1.2" d="M1673.71,-817.86C1563.86,-782.61 1196,-776.95 1003.23,-800.87"/>
+<polygon fill="#2e86c1" stroke="#2e86c1" stroke-width="1.2" points="1002.91,-797.38 993.44,-802.14 1003.81,-804.32 1002.91,-797.38"/>
+<text xml:space="preserve" text-anchor="start" x="1184.22" y="-821.36" font-family="Arial" font-size="8.00" fill="#1b4f72">  Создание/загрузка документа</text>
+<text xml:space="preserve" text-anchor="start" x="1184.22" y="-811.76" font-family="Arial" font-size="8.00" fill="#1b4f72">  Реквизиты (контрагент, сумма, статья)</text>
+</g>
+<!-- Approver&#45;&gt;Platform -->
+<g id="edge3" class="edge">
+<title>Approver-&gt;Platform</title>
+<path fill="none" stroke="#2e86c1" stroke-width="1.2" d="M1628.8,-1144.51C1566.07,-1074.43 1217.77,-915.07 1019.83,-855.05"/>
+<polygon fill="#2e86c1" stroke="#2e86c1" stroke-width="1.2" points="1021.09,-851.77 1010.51,-852.27 1019.09,-858.48 1021.09,-851.77"/>
+<text xml:space="preserve" text-anchor="start" x="1188.73" y="-1021.38" font-family="Arial" font-size="8.00" fill="#1b4f72">  Решение: Согласовать / Отклонить</text>
+<text xml:space="preserve" text-anchor="start" x="1188.73" y="-1011.78" font-family="Arial" font-size="8.00" fill="#1b4f72">  Подписание КЭП/УНЭП</text>
+<text xml:space="preserve" text-anchor="start" x="1188.73" y="-1002.18" font-family="Arial" font-size="8.00" fill="#1b4f72">  Делегирование заместителю</text>
+</g>
+<!-- Lawyer&#45;&gt;Platform -->
+<g id="edge5" class="edge">
+<title>Lawyer-&gt;Platform</title>
+<path fill="none" stroke="#2e86c1" stroke-width="1.2" d="M1441.23,-1423.48C1414.71,-1333.31 1142.1,-1025.94 986.46,-896.16"/>
+<polygon fill="#2e86c1" stroke="#2e86c1" stroke-width="1.2" points="989.11,-893.8 979.16,-890.15 984.66,-899.21 989.11,-893.8"/>
+<text xml:space="preserve" text-anchor="start" x="1077.38" y="-1152.62" font-family="Arial" font-size="8.00" fill="#1b4f72">  Правовая экспертиза (виза/отказ)</text>
+<text xml:space="preserve" text-anchor="start" x="1077.38" y="-1143.02" font-family="Arial" font-size="8.00" fill="#1b4f72">  Загрузка отредакт. версии</text>
+</g>
+<!-- Accountant&#45;&gt;Platform -->
+<g id="edge7" class="edge">
+<title>Accountant-&gt;Platform</title>
+<path fill="none" stroke="#2e86c1" stroke-width="1.2" d="M1187.8,-1590.85C1242.95,-1484.19 1103.75,-1061.87 980.22,-900.89"/>
+<polygon fill="#2e86c1" stroke="#2e86c1" stroke-width="1.2" points="983.31,-899.14 974.36,-893.47 977.81,-903.48 983.31,-899.14"/>
+<text xml:space="preserve" text-anchor="start" x="957.32" y="-1238.67" font-family="Arial" font-size="8.00" fill="#1b4f72">  Проверка реквизитов и лимитов</text>
+<text xml:space="preserve" text-anchor="start" x="957.32" y="-1229.07" font-family="Arial" font-size="8.00" fill="#1b4f72">  Виза на оплату</text>
+<text xml:space="preserve" text-anchor="start" x="957.32" y="-1219.47" font-family="Arial" font-size="8.00" fill="#1b4f72">  Ручной ввод (деградация)</text>
+</g>
+<!-- Accountant&#45;&gt;Platform -->
+<g id="edge31" class="edge">
+<title>Accountant-&gt;Platform</title>
+<path fill="none" stroke="#c0392b" stroke-dasharray="5,2" d="M1156.21,-1590.85C1120.49,-1492.68 976.15,-1096.11 912.96,-922.47"/>
+<polygon fill="#c0392b" stroke="#c0392b" points="916.32,-921.49 909.61,-913.29 909.75,-923.88 916.32,-921.49"/>
+<text xml:space="preserve" text-anchor="start" x="1034.59" y="-1268.66" font-family="Arial" font-size="8.00" fill="#922b21">  ⚠️ Ручной ввод лимитов</text>
+<text xml:space="preserve" text-anchor="start" x="1034.59" y="-1259.06" font-family="Arial" font-size="8.00" fill="#922b21">  (при недоступности ERP)</text>
+</g>
+<!-- Admin&#45;&gt;Platform -->
+<g id="edge9" class="edge">
+<title>Admin-&gt;Platform</title>
+<path fill="none" stroke="#2e86c1" stroke-width="1.2" d="M884.76,-1639.55C971.48,-1535.58 1000.84,-1095.75 944.38,-916.66"/>
+<polygon fill="#2e86c1" stroke="#2e86c1" stroke-width="1.2" points="947.71,-915.59 941.2,-907.23 941.07,-917.82 947.71,-915.59"/>
+<text xml:space="preserve" text-anchor="start" x="914.57" y="-1299.71" font-family="Arial" font-size="8.00" fill="#1b4f72">  Настройка маршрутов/шаблонов</text>
+<text xml:space="preserve" text-anchor="start" x="914.57" y="-1290.11" font-family="Arial" font-size="8.00" fill="#1b4f72">  Управление RBAC</text>
+<text xml:space="preserve" text-anchor="start" x="914.57" y="-1280.51" font-family="Arial" font-size="8.00" fill="#1b4f72">  Просмотр аудита</text>
+</g>
+<!-- Admin&#45;&gt;Platform -->
+<g id="edge32" class="edge">
+<title>Admin-&gt;Platform</title>
+<path fill="none" stroke="#c0392b" stroke-dasharray="5,2" d="M844.97,-1639.4C849.86,-1536.82 870.27,-1108.98 879.04,-925.03"/>
+<polygon fill="#c0392b" stroke="#c0392b" points="882.53,-925.21 879.51,-915.05 875.54,-924.87 882.53,-925.21"/>
+<text xml:space="preserve" text-anchor="start" x="778.65" y="-1275.02" font-family="Arial" font-size="8.00" fill="#922b21">  ⚠️ Ручная аутентификация</text>
+<text xml:space="preserve" text-anchor="start" x="778.65" y="-1265.42" font-family="Arial" font-size="8.00" fill="#922b21">  (при недоступности SSO)</text>
+</g>
+<!-- Counterparty&#45;&gt;Platform -->
+<g id="edge11" class="edge">
+<title>Counterparty-&gt;Platform</title>
+<path fill="none" stroke="#2e86c1" stroke-width="1.2" stroke-dasharray="5,2" d="M561,-1557.71C648.43,-1461.77 830.78,-1093.73 878.96,-924.89"/>
+<polygon fill="#2e86c1" stroke="#2e86c1" stroke-width="1.2" points="882.31,-925.89 881.58,-915.32 875.56,-924.04 882.31,-925.89"/>
+<text xml:space="preserve" text-anchor="start" x="719.98" y="-1253.3" font-family="Arial" font-size="8.00" fill="#1b4f72">  Подписанный документ (встречная КЭП)</text>
+<text xml:space="preserve" text-anchor="start" x="719.98" y="-1243.7" font-family="Arial" font-size="8.00" fill="#1b4f72">  Комментарии/протокол разногласий</text>
+</g>
+<!-- SSO&#45;&gt;Platform -->
+<g id="edge14" class="edge">
+<title>SSO-&gt;Platform</title>
+<path fill="none" stroke="#d4ac0d" stroke-width="1.2" d="M326.67,-1358.29C457.75,-1285.52 735.99,-1048.17 842.7,-919.93"/>
+<polygon fill="#d4ac0d" stroke="#d4ac0d" stroke-width="1.2" points="845.32,-922.26 848.93,-912.3 839.89,-917.83 845.32,-922.26"/>
+<text xml:space="preserve" text-anchor="start" x="491.33" y="-1151.11" font-family="Arial" font-size="8.00" fill="#7d6608">  Токен + роли + группы</text>
+<text xml:space="preserve" text-anchor="start" x="491.33" y="-1141.51" font-family="Arial" font-size="8.00" fill="#7d6608">  Статус учётной записи</text>
+</g>
+<!-- CryptoProvider&#45;&gt;Platform -->
+<g id="edge16" class="edge">
+<title>CryptoProvider-&gt;Platform</title>
+<path fill="none" stroke="#d4ac0d" stroke-width="1.2" d="M166.62,-1075.26C313.88,-1062.74 638.95,-972.93 795.62,-903.45"/>
+<polygon fill="#d4ac0d" stroke="#d4ac0d" stroke-width="1.2" points="796.82,-906.75 804.49,-899.44 793.94,-900.37 796.82,-906.75"/>
+<text xml:space="preserve" text-anchor="start" x="347.54" y="-1001.35" font-family="Arial" font-size="8.00" fill="#7d6608">  Подписанный хеш + штамп времени</text>
+<text xml:space="preserve" text-anchor="start" x="347.54" y="-991.75" font-family="Arial" font-size="8.00" fill="#7d6608">  Статус сертификата</text>
+</g>
+<!-- OrgStruct&#45;&gt;Platform -->
+<g id="edge18" class="edge">
+<title>OrgStruct-&gt;Platform</title>
+<path fill="none" stroke="#27ae60" stroke-width="1.2" d="M90.56,-726.9C177.43,-779.71 546.22,-848.79 748.72,-859.03"/>
+<polygon fill="#27ae60" stroke="#27ae60" stroke-width="1.2" points="748.35,-862.52 758.5,-859.48 748.67,-855.53 748.35,-862.52"/>
+<text xml:space="preserve" text-anchor="start" x="304.06" y="-804.96" font-family="Arial" font-size="8.00" fill="#1e8449">  Оргструктура</text>
+<text xml:space="preserve" text-anchor="start" x="304.06" y="-795.36" font-family="Arial" font-size="8.00" fill="#1e8449">  Руководители и заместители</text>
+</g>
+<!-- ERP&#45;&gt;Platform -->
+<g id="edge20" class="edge">
+<title>ERP-&gt;Platform</title>
+<path fill="none" stroke="#27ae60" stroke-width="1.2" d="M208.59,-397.59C254.41,-478.1 575.24,-707.68 758.1,-803.15"/>
+<polygon fill="#27ae60" stroke="#27ae60" stroke-width="1.2" points="756.48,-806.25 766.98,-807.72 759.69,-800.03 756.48,-806.25"/>
+<text xml:space="preserve" text-anchor="start" x="356.65" y="-621.97" font-family="Arial" font-size="8.00" fill="#1e8449">  Данные по лимитам</text>
+<text xml:space="preserve" text-anchor="start" x="356.65" y="-612.37" font-family="Arial" font-size="8.00" fill="#1e8449">  Статус контрагента</text>
+<text xml:space="preserve" text-anchor="start" x="356.65" y="-602.77" font-family="Arial" font-size="8.00" fill="#1e8449">  Подтверждение резервирования</text>
+</g>
+<!-- Regulator&#45;&gt;Platform -->
+<g id="edge22" class="edge">
+<title>Regulator-&gt;Platform</title>
+<path fill="none" stroke="#27ae60" stroke-width="1.2" stroke-dasharray="5,2" d="M457.86,-155.1C466.36,-251.7 675.65,-618.24 800.02,-772.58"/>
+<polygon fill="#27ae60" stroke="#27ae60" stroke-width="1.2" points="797.17,-774.61 806.2,-780.14 802.58,-770.18 797.17,-774.61"/>
+<text xml:space="preserve" text-anchor="start" x="475.58" y="-456.64" font-family="Arial" font-size="8.00" fill="#1e8449">  Запрос на предоставление документов</text>
+</g>
+<!-- DocStorage&#45;&gt;Platform -->
+<g id="edge24" class="edge">
+<title>DocStorage-&gt;Platform</title>
+<path fill="none" stroke="#e67e22" stroke-width="1.2" d="M787.66,-44.22C756.18,-147.39 792.46,-578.45 840.75,-759.63"/>
+<polygon fill="#e67e22" stroke="#e67e22" stroke-width="1.2" points="837.35,-760.48 843.39,-769.19 844.1,-758.62 837.35,-760.48"/>
+<text xml:space="preserve" text-anchor="start" x="738.41" y="-394.73" font-family="Arial" font-size="8.00" fill="#a04000">  Файл + метаданные</text>
+<text xml:space="preserve" text-anchor="start" x="738.41" y="-385.13" font-family="Arial" font-size="8.00" fill="#a04000">  История версий</text>
+</g>
+<!-- Notifier&#45;&gt;Platform -->
+<g id="edge26" class="edge">
+<title>Notifier-&gt;Platform</title>
+<path fill="none" stroke="#e67e22" stroke-width="1.2" d="M1118.91,-84.87C1044.51,-183.94 904.67,-579.94 876.92,-755.9"/>
+<polygon fill="#e67e22" stroke="#e67e22" stroke-width="1.2" points="873.48,-755.22 875.48,-765.62 880.4,-756.24 873.48,-755.22"/>
+<text xml:space="preserve" text-anchor="start" x="929.01" y="-422.78" font-family="Arial" font-size="8.00" fill="#a04000">  Статус доставки</text>
+</g>
+<!-- Archive&#45;&gt;Platform -->
+<g id="edge28" class="edge">
+<title>Archive-&gt;Platform</title>
+<path fill="none" stroke="#e67e22" stroke-width="1.2" d="M1388.76,-268.38C1266.08,-351.85 1007.81,-620.09 914.38,-758.8"/>
+<polygon fill="#e67e22" stroke="#e67e22" stroke-width="1.2" points="911.52,-756.77 908.94,-767.05 917.37,-760.63 911.52,-756.77"/>
+<text xml:space="preserve" text-anchor="start" x="1021.77" y="-515.99" font-family="Arial" font-size="8.00" fill="#a04000">  Документ из архива (по запросу)</text>
+</g>
+<!-- EDO&#45;&gt;Platform -->
+<g id="edge30" class="edge">
+<title>EDO-&gt;Platform</title>
+<path fill="none" stroke="#e67e22" stroke-width="1.2" d="M1592.46,-520.88C1460.08,-539.1 1110.73,-678.95 956.89,-771.18"/>
+<polygon fill="#e67e22" stroke="#e67e22" stroke-width="1.2" points="955.31,-768.04 948.59,-776.24 958.95,-774.02 955.31,-768.04"/>
+<text xml:space="preserve" text-anchor="start" x="1134.65" y="-658.03" font-family="Arial" font-size="8.00" fill="#a04000">  Входящий документ от контрагента</text>
+<text xml:space="preserve" text-anchor="start" x="1134.65" y="-648.43" font-family="Arial" font-size="8.00" fill="#a04000">  Квитанция о доставке</text>
+</g>
+</g>
+</svg>

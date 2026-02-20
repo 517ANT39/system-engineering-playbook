@@ -1,5 +1,5 @@
 # Summary
 
-- [Конфигурация проекта](./md.md)
+- [Контекстная диаграмма](context-diagram.md)
 - [Пример использования Drawio](./drawio.md)
 - [Пример использования Swagger](./swagger.md)

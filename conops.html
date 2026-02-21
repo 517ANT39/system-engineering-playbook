@@ -1,0 +1,479 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>CONOPS (Concept of Operation) - system-engineering-playbook</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="src/_assets/custom.css">
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "searchindex.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">system-engineering-playbook</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <i class="fa fa-spinner fa-spin"></i>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h2 id="2-conops-concept-of-operation"><a class="header" href="#2-conops-concept-of-operation">2. CONOPS (Concept of Operation)</a></h2>
+<h3 id="Участники-стейкхолдерыроли"><a class="header" href="#Участники-стейкхолдерыроли">Участники (стейкхолдеры/роли)</a></h3>
+<ol>
+<li><strong>Инициатор</strong> — сотрудник, который создаёт документ (заявку, договор, служебную записку) и запускает его по маршруту согласования.</li>
+<li><strong>Согласующий</strong> — руководитель или ответственный сотрудник, который должен утвердить или отклонить документ.</li>
+<li><strong>Юрист</strong> — специалист юридического отдела, проверяющий документы на соответствие законодательству и внутренним нормативам (комплаенс).</li>
+<li><strong>Бухгалтер</strong> — сотрудник финансового отдела, работающий с заявками на оплату и финансовыми условиями договоров.</li>
+<li><strong>Администратор</strong> — специалист IT/HR, настраивающий маршруты, права доступа, справочники и шаблоны.</li>
+<li><strong>Контрагент</strong> — внешняя организация (сторона по договору), взаимодействует через оператора ЭДО (электронного документооборота).</li>
+</ol>
+<h3 id="Системные-элементы-типовая-конфигурация"><a class="header" href="#Системные-элементы-типовая-конфигурация">Системные элементы (типовая конфигурация)</a></h3>
+<ol>
+<li><strong>Маршрутизатор</strong> (Workflow Engine) — ядро системы, управляющее движением задач по ролям и контролем сроков (SLA).</li>
+<li><strong>Репозиторий документов</strong> — хранилище файлов с поддержкой версионности (VCS — Version Control System), хранит историю изменений.</li>
+<li><strong>Модуль КЭП/УНЭП</strong> — интеграция с криптопровайдером (УЦ — удостоверяющий центр) для наложения электронных подписей. КЭП — квалифицированная электронная подпись, УНЭП — усиленная неквалифицированная электронная подпись.</li>
+<li><strong>Журнал аудита</strong> (Audit Log) — неизменяемая лента событий для юридической значимости.</li>
+<li><strong>Сервис уведомлений</strong> — отправка Email / Push / SMS через внешний шлюз.</li>
+<li><strong>Модуль аутентификации (SSO)</strong> — подсистема единого входа (Single Sign-On). Интегрируется с корпоративным каталогом (Active Directory / LDAP): при входе пользователя запрашивает у каталога проверку учётных данных и получает в ответ токен, роли и группы. Все остальные модули платформы доверяют этому токену и не запрашивают пароль повторно. Если корпоративный каталог недоступен, Администратор может переключить модуль в режим ручной аутентификации (см. режимы деградации).</li>
+<li><strong>Справочник оргструктуры</strong> — кэшированная база сотрудников, ролей и иерархии. Периодически синхронизируется с HR-системой. Для определения ролей и замещений Маршрутизатор обращается именно к этому справочнику, а не напрямую к внешним системам.</li>
+<li><strong>Модуль ЭДО</strong> — обмен юридически значимыми документами с контрагентами через внешнего оператора ЭДО (роуминг).</li>
+<li><strong>Модуль архивации</strong> — передача завершённых дел в долговременный архив (по ФЗ-125, хранение 5+ лет).</li>
+</ol>
+<hr />
+<h3 id="Сценарий-1-Запуск-договора-на-согласование-Инициатор--Юрист--Согласующий--Контрагент"><a class="header" href="#Сценарий-1-Запуск-договора-на-согласование-Инициатор--Юрист--Согласующий--Контрагент">Сценарий 1. Запуск договора на согласование (Инициатор → Юрист → Согласующий → Контрагент)</a></h3>
+<h4 id="Цель"><a class="header" href="#Цель">Цель</a></h4>
+<ol>
+<li>Создать договор с контрагентом, провести юридическую экспертизу и бизнес-утверждение с контролем версий, затем направить контрагенту на подпись через ЭДО.</li>
+</ol>
+<h4 id="Условия-начала"><a class="header" href="#Условия-начала">Условия начала</a></h4>
+<ol>
+<li>Инициатор авторизован в платформе через Модуль аутентификации (SSO) — получен токен с ролями.</li>
+<li>Справочник оргструктуры актуален (известны роли Юриста и Согласующего).</li>
+<li>Реквизиты контрагента проверены через ERP (статус активен).</li>
+<li>Шаблон договора доступен для загрузки.</li>
+</ol>
+<h4 id="Основной-поток-happy-path"><a class="header" href="#Основной-поток-happy-path">Основной поток (Happy path)</a></h4>
+<ol>
+<li>Инициатор создаёт карточку договора, заполняет реквизиты (контрагент, сумма, предмет) и загружает файл (Версия 1).</li>
+<li>Маршрутизатор обращается к Справочнику оргструктуры, определяет маршрут: первый шаг — Юрист.</li>
+<li>Юрист получает уведомление (через Сервис уведомлений), открывает задачу, вносит правки, загружает Версию 1.1 с пометкой «Правки юриста».</li>
+<li>Репозиторий документов сохраняет обе версии, связывая их с одной карточкой.</li>
+<li>Юрист нажимает «Согласовано», задача переходит к Согласующему.</li>
+<li>Согласующий видит разницу версий, утверждает файл и накладывает КЭП через Модуль КЭП/УНЭП.</li>
+<li>Модуль подписи фиксирует подпись, Журнал аудита сохраняет событие (кто, когда, IP, хеш файла, сертификат).</li>
+<li>Модуль ЭДО направляет подписанный документ Контрагенту через внешнего оператора ЭДО.</li>
+<li>Контрагент подписывает встречной КЭП. Оператор ЭДО возвращает квитанцию и подписанный экземпляр.</li>
+<li>Инициатор получает уведомление: «Договор подписан обеими сторонами».</li>
+<li>Модуль архивации передаёт завершённое дело в долговременный архив.</li>
+</ol>
+<h4 id="Результат"><a class="header" href="#Результат">Результат</a></h4>
+<ol>
+<li>Договор подписан КЭП обеими сторонами, все версии сохранены, аудиторский след сформирован, документ в архиве.</li>
+</ol>
+<h4 id="Исключения-нештатные-ситуации"><a class="header" href="#Исключения-нештатные-ситуации">Исключения (нештатные ситуации)</a></h4>
+<ol>
+<li><strong>Юрист отклонил договор</strong>
+1.1. Юрист пишет причину отказа (например, «Неверная форма собственности контрагента»).
+1.2. Маршрутизатор возвращает задачу Инициатору на доработку.
+1.3. Статус документа меняется на «Доработка».</li>
+<li><strong>Конфликт версий</strong> (параллельное редактирование)
+2.1. Юрист и Согласующий сохранили свои версии параллельно (Версия 1.1 и 1.2).
+2.2. Репозиторий документов фиксирует конфликт.
+2.3. Тот, кто нажимает «Согласовать» позже, видит предупреждение: «Файл был изменён. Загрузите актуальную версию или разрешите конфликт вручную».</li>
+<li><strong>Нет прав на подписание у Согласующего</strong>
+3.1. Модуль КЭП/УНЭП проверяет сертификат ЭП (через OCSP — протокол проверки статуса сертификата). Если недействителен — кнопка «Подписать» блокируется, предлагается перевыпуск или делегирование заместителю.</li>
+<li><strong>Контрагент отклонил документ</strong>
+4.1. Оператор ЭДО передаёт протокол разногласий. Маршрутизатор возвращает задачу Инициатору/Юристу.</li>
+<li><strong>Реквизиты контрагента не найдены в ERP</strong>
+5.1. Система блокирует отправку до заведения контрагента в справочнике.</li>
+</ol>
+<h4 id="Режимы-деградации-как-продолжаем-работать"><a class="header" href="#Режимы-деградации-как-продолжаем-работать">Режимы деградации (как продолжаем работать)</a></h4>
+<ol>
+<li><strong>Модуль КЭП/УНЭП недоступен</strong> (криптопровайдер не отвечает)
+1.1. Документ переходит в статус «Ожидание подписи (оффлайн)».
+1.2. Согласующий может проставить визу (внутреннюю отметку), но юридически документ не подписан.
+1.3. При восстановлении — документ ставится в очередь на подписание.</li>
+<li><strong>Корпоративный каталог (AD/LDAP) не отвечает</strong> — затрагивает и SSO, и Справочник оргструктуры
+2.1. Модуль аутентификации: уже авторизованные пользователи продолжают работать по действующему токену. Новые входы невозможны, пока Администратор не включит ручную аутентификацию.
+2.2. Справочник оргструктуры: Маршрутизатор использует кэшированную копию (вчерашняя выгрузка). Задачи назначаются по ролям, а не по ФИО.
+2.3. При восстановлении — синхронизация.</li>
+<li><strong>Оператор ЭДО недоступен</strong>
+3.1. Документ в статусе «Ожидание отправки», автоматическая отправка при восстановлении.</li>
+</ol>
+<hr />
+<h3 id="Сценарий-2-Срочное-согласование-служебной-записки-мобильный-доступ"><a class="header" href="#Сценарий-2-Срочное-согласование-служебной-записки-мобильный-доступ">Сценарий 2. Срочное согласование служебной записки (мобильный доступ)</a></h3>
+<h4 id="Цель-1"><a class="header" href="#Цель-1">Цель</a></h4>
+<ol>
+<li>Согласовать срочную служебную записку (например, на выдачу материальных ценностей) в нерабочее время через мобильное устройство.</li>
+</ol>
+<h4 id="Условия-начала-1"><a class="header" href="#Условия-начала-1">Условия начала</a></h4>
+<ol>
+<li>Сотрудники вне офиса, используется мобильное приложение.</li>
+<li>Инициатор авторизован через Модуль аутентификации (SSO) — токен действующий.</li>
+</ol>
+<h4 id="Основной-поток"><a class="header" href="#Основной-поток">Основной поток</a></h4>
+<ol>
+<li>Инициатор создаёт служебную записку, прикрепляет скан-копии (фото с телефона).</li>
+<li>Маршрутизатор через Справочник оргструктуры определяет маршрут: Согласующий (руководитель), Бухгалтер — только если сумма выше лимита.</li>
+<li>Согласующий получает push-уведомление (через Сервис уведомлений), открывает документ на смартфоне.</li>
+<li>Согласующий нажимает «Согласовать» (простая ЭП или УНЭП через SMS-код, если КЭП не требуется).</li>
+<li>Сумма ниже порога бухгалтерии — маршрут завершается.</li>
+<li>Инициатор и Бухгалтер (для сведения) получают уведомление.</li>
+</ol>
+<h4 id="Результат-1"><a class="header" href="#Результат-1">Результат</a></h4>
+<ol>
+<li>Служебная записка утверждена руководителем в условиях мобильного UI.</li>
+</ol>
+<h4 id="Исключения"><a class="header" href="#Исключения">Исключения</a></h4>
+<ol>
+<li><strong>Медленный интернет / обрыв связи</strong>
+1.1. Приложение работает в оффлайн-режиме: сохраняет черновик локально.
+1.2. Решение помещается в очередь.
+1.3. При восстановлении — синхронизация с пометкой в Журнале аудита «Подписано в оффлайн-режиме».</li>
+<li><strong>Документ требует КЭП, но на устройстве нет сертификата</strong>
+2.1. Модуль КЭП/УНЭП не находит сертификат. Система предлагает «Отложенную подпись»: задача бронируется, требуется подтверждение с рабочего ПК в течение 24 часов, либо УНЭП через SMS-код.</li>
+</ol>
+<h4 id="Режимы-деградации"><a class="header" href="#Режимы-деградации">Режимы деградации</a></h4>
+<ol>
+<li><strong>Сервис уведомлений / шлюз недоступен</strong>
+1.1. Push не доставлен. Платформа повторяет через альтернативный канал (SMS → Email).</li>
+<li><strong>Модуль аутентификации (SSO) недоступен</strong>
+2.1. Мобильное приложение использует кэшированный токен, если сессия активна. При истечении токена — вход невозможен до восстановления.</li>
+</ol>
+<hr />
+<h3 id="Сценарий-3-Заявка-на-оплату-Бухгалтерия-и-контроль-лимитов"><a class="header" href="#Сценарий-3-Заявка-на-оплату-Бухгалтерия-и-контроль-лимитов">Сценарий 3. Заявка на оплату (Бухгалтерия и контроль лимитов)</a></h3>
+<h4 id="Цель-2"><a class="header" href="#Цель-2">Цель</a></h4>
+<ol>
+<li>Провести заявку на оплату счёта через бухгалтерию с проверкой бюджетных лимитов и корректности заполнения.</li>
+</ol>
+<h4 id="Условия-начала-2"><a class="header" href="#Условия-начала-2">Условия начала</a></h4>
+<ol>
+<li>Заявка создана на основании утверждённого договора.</li>
+<li>В системе настроены бюджетные лимиты по статьям расходов (интеграция с ERP).</li>
+</ol>
+<h4 id="Основной-поток-1"><a class="header" href="#Основной-поток-1">Основной поток</a></h4>
+<ol>
+<li>Инициатор заполняет заявку: ссылка на договор, сумма, статья расходов, скан счёта.</li>
+<li>Маршрутизатор автоматически запрашивает ERP: остаток бюджета по статье, лимит договора, реквизиты контрагента.</li>
+<li>Если лимиты позволяют — заявка уходит Бухгалтеру.</li>
+<li>Бухгалтер проверяет реквизиты (ИНН, КПП, расчётный счёт, назначение платежа).</li>
+<li>Бухгалтер нажимает «Исполнить» или «Передать в платёжную систему».</li>
+<li>Система фиксирует оплату и списывает сумму из лимита в ERP.</li>
+</ol>
+<h4 id="Результат-2"><a class="header" href="#Результат-2">Результат</a></h4>
+<ol>
+<li>Заявка обработана, лимиты скорректированы.</li>
+</ol>
+<h4 id="Исключения-1"><a class="header" href="#Исключения-1">Исключения</a></h4>
+<ol>
+<li><strong>Превышение бюджетного лимита</strong>
+1.1. Система не позволяет отправить Бухгалтеру.
+1.2. Маршрутизатор через Справочник оргструктуры находит вышестоящего руководителя или финдиректора и добавляет в цепочку (эскалация).
+1.3. Заявка в статусе «Ожидание бюджета».</li>
+<li><strong>Реквизиты контрагента не найдены</strong>
+2.1. Система блокирует отправку, пока контрагент не будет заведён в ERP/CRM.</li>
+</ol>
+<h4 id="Режимы-деградации-1"><a class="header" href="#Режимы-деградации-1">Режимы деградации</a></h4>
+<ol>
+<li><strong>Интеграция с ERP недоступна</strong>
+1.1. Модуль проверки лимитов переходит в ручной режим.
+1.2. Бухгалтер получает задачу с пометкой «Проверить лимиты вручную».
+1.3. Бухгалтер чекбоксом подтверждает, что лимит есть (берёт ответственность на себя), и проводит заявку.</li>
+</ol>
+<hr />
+<h3 id="Сценарий-4-Коллегиальное-согласование-параллельный-маршрут--голосование"><a class="header" href="#Сценарий-4-Коллегиальное-согласование-параллельный-маршрут--голосование">Сценарий 4. Коллегиальное согласование (параллельный маршрут + голосование)</a></h3>
+<h4 id="Цель-3"><a class="header" href="#Цель-3">Цель</a></h4>
+<ol>
+<li>Согласовать стратегический документ (Политику, Положение), требующий одобрения нескольких руководителей одновременно.</li>
+</ol>
+<h4 id="Условия-начала-3"><a class="header" href="#Условия-начала-3">Условия начала</a></h4>
+<ol>
+<li>Создан документ, требующий визирования: Юрист, HR-директор, Техдиректор, Финдиректор.</li>
+<li>Маршрут параллельного согласования настроен Администратором.</li>
+</ol>
+<h4 id="Основной-поток-2"><a class="header" href="#Основной-поток-2">Основной поток</a></h4>
+<ol>
+<li>Инициатор запускает задачу на параллельное согласование.</li>
+<li>Маршрутизатор через Справочник оргструктуры находит всех Согласующих и создаёт им задачи одновременно.</li>
+<li>Каждый получает уведомление (через Сервис уведомлений), видит документ и голосует: «За» / «Против» / «Воздержался».</li>
+<li>Маршрутизатор агрегирует голоса по правилу (единогласно / большинство).</li>
+<li>Допустим, Юрист — против. Результат: «Не согласовано. Юрист против».</li>
+<li>Инициатор получает уведомление с протоколом разногласий.</li>
+</ol>
+<h4 id="Результат-3"><a class="header" href="#Результат-3">Результат</a></h4>
+<ol>
+<li>Документ отклонён с фиксацией позиции каждого участника в Журнале аудита.</li>
+</ol>
+<h4 id="Исключения-2"><a class="header" href="#Исключения-2">Исключения</a></h4>
+<ol>
+<li><strong>Тайм-аут ожидания голосов</strong> (контроль сроков)
+1.1. Сервис уведомлений отправляет напоминания (SLA). Если к дедлайну проголосовало 2 из 3, система применяет политику «Молчание — знак согласия» (если настроено) или фиксирует кворум (&gt;50%).</li>
+<li><strong>Голосование «За, с замечаниями»</strong>
+2.1. Комментарий прикрепляется к документу в Репозитории.
+2.2. Если кто-то «Против» с блокирующими правками — задача возвращается Инициатору, остальные голоса помечаются как неактуальные.</li>
+</ol>
+<h4 id="Режимы-деградации-2"><a class="header" href="#Режимы-деградации-2">Режимы деградации</a></h4>
+<ol>
+<li><strong>Справочник оргструктуры устарел</strong> (HR-система не отвечает, не удаётся найти заместителей)
+1.1. Используется кэшированная копия, задачи назначаются по роли, а не по ФИО.</li>
+<li><strong>Сервис уведомлений недоступен</strong>
+2.1. Напоминания SLA не отправляются. Задачи доступны при входе в платформу. При восстановлении — массовая рассылка.</li>
+</ol>
+<hr />
+<h3 id="Сценарий-5-Аудит-и-разбирательство-юридическая-значимость"><a class="header" href="#Сценарий-5-Аудит-и-разбирательство-юридическая-значимость">Сценарий 5. Аудит и разбирательство (юридическая значимость)</a></h3>
+<h4 id="Цель-4"><a class="header" href="#Цель-4">Цель</a></h4>
+<ol>
+<li>Восстановить полную картину событий по договору в случае судебного спора или проверки контролирующими органами (ФНС, внешний аудит).</li>
+</ol>
+<h4 id="Условия-начала-4"><a class="header" href="#Условия-начала-4">Условия начала</a></h4>
+<ol>
+<li>Юрист или Администратор имеет право на просмотр Журнала аудита (права настроены Администратором).</li>
+</ol>
+<h4 id="Основной-поток-3"><a class="header" href="#Основной-поток-3">Основной поток</a></h4>
+<ol>
+<li>Юрист открывает карточку спорного договора. Если документ в архиве — Модуль архивации запрашивает его из долговременного хранилища.</li>
+<li>Переходит на вкладку «Аудит». Система отображает неизменяемую ленту из Журнала аудита:
+<ul>
+<li><code>01.02 10:00</code> — Иванов И.И. (Инициатор) загрузил version_1.docx (Хеш: A12F)</li>
+<li><code>01.02 14:20</code> — Петрова А. (Юрист) загрузила version_2.docx (Хеш: B34C). Комментарий: «Поправил п.3.2»</li>
+<li><code>02.02 09:00</code> — Сидоров (Согласующий) ПОДПИСАЛ КЭП. Хеш: B34C. Сертификат: №567</li>
+<li><code>03.02 11:00</code> — Документ направлен Контрагенту через ЭДО. Квитанция: №890</li>
+<li><code>04.02 15:30</code> — Контрагент подписал встречной КЭП. Хеш: B34C</li>
+</ul>
+</li>
+<li>Юрист проверяет подпись: Модуль КЭП/УНЭП обращается к криптопровайдеру (OCSP — проверка статуса сертификата, TSP — метка времени).</li>
+<li>При необходимости скачивает конкретную версию файла из Репозитория документов по хешу для сверки.</li>
+<li>Экспортирует Акт аудита в PDF, заверенный системной печатью платформы.</li>
+</ol>
+<h4 id="Результат-4"><a class="header" href="#Результат-4">Результат</a></h4>
+<ol>
+<li>Сформирован юридически значимый отчёт, доказывающий цепочку событий.</li>
+</ol>
+<h4 id="Исключения-3"><a class="header" href="#Исключения-3">Исключения</a></h4>
+<ol>
+<li><strong>Попытка подделать лог в БД</strong>
+1.1. Невозможно по NFR (нефункциональные требования). Журнал аудита использует криптографическое связывание записей (blockchain-like) или WORM-носитель (Write Once Read Many — однократная запись, многократное чтение). Любое изменение нарушает крипто-цепочку и обнаруживается мониторингом.</li>
+<li><strong>Сертификат подписи отозван</strong>
+2.1. Модуль КЭП/УНЭП проверяет статус через OCSP. Если сертификат отозван ПОСЛЕ подписания — документ действителен (метка времени TSP спасает). Если ДО — документ ничтожен, аудит фиксирует нарушение.</li>
+</ol>
+<hr />
+<h3 id="Таблица-Сценарий--основные-сбои--деградация"><a class="header" href="#Таблица-Сценарий--основные-сбои--деградация">Таблица «Сценарий → основные сбои → деградация»</a></h3>
+<div class="table-wrapper"><table><thead><tr><th>№</th><th>Сценарий</th><th>Критичный сбой</th><th>Деградация (fallback)</th></tr></thead><tbody>
+<tr><td>1</td><td>Запуск договора (Юрист → Руководитель → Контрагент)</td><td>Конфликт версий при параллельном редактировании</td><td>Блокировка сохранения вторым редактором; ручное разрешение конфликта (скачать, объединить, загрузить новую версию)</td></tr>
+<tr><td>2</td><td>Согласование служебки (мобайл)</td><td>Модуль КЭП недоступен или нет сертификата на устройстве</td><td>Режим «Отложенной подписи» (УНЭП/SMS) или бронирование задачи до возврата на ПК</td></tr>
+<tr><td>3</td><td>Заявка на оплату</td><td>Интеграция с ERP (проверка лимитов) недоступна</td><td>Ручной режим: бухгалтер подтверждает лимит чекбоксом, берёт ответственность</td></tr>
+<tr><td>4</td><td>Коллегиальное голосование</td><td>Тайм-аут ожидания голосов (контроль сроков)</td><td>Политика «Молчание — знак согласия» или фиксация решения по кворуму</td></tr>
+<tr><td>5</td><td>Аудит действий</td><td>Попытка модификации логов (внешний взлом)</td><td>Криптографическая связка логов (blockchain-like). Нарушение целостности детектируется, доступ блокируется</td></tr>
+</tbody></table>
+</div>
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="context-diagram.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="requirements.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="context-diagram.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="requirements.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

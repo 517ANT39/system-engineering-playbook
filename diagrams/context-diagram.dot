@@ -5,12 +5,10 @@ digraph ContextDiagram {
   fontname="Arial";
   fontsize=11;
   compound=true;
-  nodesep=0.8;
-  ranksep=3.5;
-  pad=0.5;
-  mindist=3.0;     // минимальное расстояние между узлами
-  nodesep=2.0;     // расстояние между узлами
+  nodesep=2.0;
   ranksep=5.0;
+  pad=0.5;
+  mindist=3.0;
 
   // Стили по умолчанию
   node [fontname="Arial", fontsize=10, penwidth=1.5];
@@ -18,6 +16,7 @@ digraph ContextDiagram {
 
   // ════════════════════════════════════════
   //  ЦЕНТРАЛЬНАЯ СИСТЕМА (Process 0)
+  //  SSO теперь явно указан как внутренний модуль
   // ════════════════════════════════════════
   Platform [
     shape=ellipse,
@@ -25,14 +24,15 @@ digraph ContextDiagram {
     fillcolor="#B3D9FF",
     color="#1A5276",
     penwidth=2.5,
-    width=3.5,
-    height=2.0,
+    width=3.8,
+    height=2.2,
     label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="2">
       <TR><TD><B>Платформа документооборота</B></TD></TR>
       <TR><TD><B>и согласований</B></TD></TR>
       <TR><TD><FONT POINT-SIZE="8" COLOR="#555555">───────────────</FONT></TD></TR>
-      <TR><TD><FONT POINT-SIZE="7" COLOR="#1A5276">Маршруты · Версии · Подписи</FONT></TD></TR>
-      <TR><TD><FONT POINT-SIZE="7" COLOR="#1A5276">Контроль сроков · Аудит</FONT></TD></TR>
+      <TR><TD><FONT POINT-SIZE="7" COLOR="#1A5276">Маршрутизатор · Репозиторий · КЭП/УНЭП</FONT></TD></TR>
+      <TR><TD><FONT POINT-SIZE="7" COLOR="#1A5276">Модуль аутентификации (SSO) · Аудит</FONT></TD></TR>
+      <TR><TD><FONT POINT-SIZE="7" COLOR="#1A5276">Уведомления · ЭДО · Архивация</FONT></TD></TR>
     </TABLE>>
   ];
 
@@ -83,6 +83,9 @@ digraph ContextDiagram {
 
   // ════════════════════════════════════════
   //  ВНЕШНИЕ СИСТЕМЫ: БЕЗОПАСНОСТЬ И ИДЕНТИФИКАЦИЯ
+  //  SSO переименован → «Корпоративный каталог»,
+  //  т.к. SSO — внутренний модуль платформы,
+  //  а AD/LDAP — внешний источник данных
   // ════════════════════════════════════════
   subgraph cluster_security {
     label=<<B>🔐 Безопасность и идентификация</B>>;
@@ -95,9 +98,10 @@ digraph ContextDiagram {
 
     node [shape=box, style="filled", fillcolor="#FCF3CF", color="#D4AC0D"];
 
-    SSO            [label=<<TABLE BORDER="0" CELLBORDER="0">
-      <TR><TD>🔑 <B>Корпоративный SSO</B></TD></TR>
+    ADCatalog      [label=<<TABLE BORDER="0" CELLBORDER="0">
+      <TR><TD>🔑 <B>Корпоративный каталог</B></TD></TR>
       <TR><TD><FONT POINT-SIZE="8">Active Directory / LDAP</FONT></TD></TR>
+      <TR><TD><FONT POINT-SIZE="7" COLOR="#7D6608">Учётные записи, группы, пароли</FONT></TD></TR>
     </TABLE>>];
 
     CryptoProvider [label=<<TABLE BORDER="0" CELLBORDER="0">
@@ -190,11 +194,11 @@ digraph ContextDiagram {
   Platform -> Lawyer [label="  Задача на визирование\l  Уведомление о новой версии\l"];
 
   // Бухгалтер
-  Accountant -> Platform [label="  Проверка реквизитов и лимитов\l  Виза на оплату\l  Ручной ввод (деградация)\l"];
+  Accountant -> Platform [label="  Проверка реквизитов и лимитов\l  Виза на оплату\l"];
   Platform -> Accountant [label="  Задача на проверку\l  Превышение лимита ⚠️\l"];
 
   // Администратор
-  Admin -> Platform [label="  Настройка маршрутов/шаблонов\l  Управление RBAC\l  Просмотр аудита\l"];
+  Admin -> Platform [label="  Настройка маршрутов/шаблонов\l  Управление правами доступа (RBAC)\l  Просмотр аудита\l"];
   Platform -> Admin [label="  Журнал аудита (immutable)\l  Метрики SLA\l  Алерты безопасности\l"];
 
   // Контрагент (через ЭДО)
@@ -208,8 +212,10 @@ digraph ContextDiagram {
   // --- Безопасность (жёлтые) ---
   edge [color="#D4AC0D", fontcolor="#7D6608"];
 
-  Platform -> SSO [label="  Запрос аутентификации\l  Проверка сессии\l"];
-  SSO -> Platform [label="  Токен + роли + группы\l  Статус учётной записи\l"];
+  // Модуль аутентификации (SSO) внутри платформы
+  // обращается к внешнему корпоративному каталогу
+  Platform -> ADCatalog [label="  Проверка учётных данных\l  Запрос групп и ролей пользователя\l  Проверка статуса учётной записи\l"];
+  ADCatalog -> Platform [label="  Подтверждение аутентификации\l  Группы, роли, атрибуты\l  Данные для Справочника оргструктуры\l"];
 
   Platform -> CryptoProvider [label="  Хеш документа → подпись КЭП/УНЭП\l  Проверка сертификата (OCSP)\l  Запрос метки времени (TSP)\l"];
   CryptoProvider -> Platform [label="  Подписанный хеш + штамп времени\l  Статус сертификата\l"];
@@ -217,7 +223,7 @@ digraph ContextDiagram {
   // --- Учётные системы (зелёные) ---
   edge [color="#27AE60", fontcolor="#1E8449"];
 
-  Platform -> OrgStruct [label="  Запрос иерархии\l  Поиск роли (юрист, CFO)\l  Проверка замещений\l"];
+  Platform -> OrgStruct [label="  Синхронизация оргструктуры\l  Запрос иерархии и замещений\l"];
   OrgStruct -> Platform [label="  Оргструктура\l  Руководители и заместители\l"];
 
   Platform -> ERP [label="  Остаток бюджета по статье\l  Проверка лимитов\l  Реквизиты контрагента\l"];
@@ -247,5 +253,5 @@ digraph ContextDiagram {
   edge [color="#C0392B", fontcolor="#922B21", style=dashed, penwidth=1.0];
 
   Accountant -> Platform [label="  ⚠️ Ручной ввод лимитов\l  (при недоступности ERP)\l", constraint=false];
-  Admin -> Platform [label="  ⚠️ Ручная аутентификация\l  (при недоступности SSO)\l", constraint=false];
+  Admin -> Platform [label="  ⚠️ Ручная аутентификация\l  (при недоступности AD/LDAP)\l", constraint=false];
 }

@@ -11,6 +11,6 @@
     text-align: center;
 }
 
-.content main:has(table) {
+.content main:has(h2[id='4-Архитектура']) {
     max-width:fit-content;
 }

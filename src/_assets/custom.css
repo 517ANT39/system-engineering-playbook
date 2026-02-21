@@ -6,6 +6,7 @@
   margin: 10px 0;
 }
 
-.content main {
+.content main:has(iframe) {
     max-width:fit-content;
+    text-align: center;
 }

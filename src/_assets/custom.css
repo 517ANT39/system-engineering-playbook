@@ -10,3 +10,7 @@
     max-width:fit-content;
     text-align: center;
 }
+
+.content main:has(table) {
+    max-width:fit-content;
+}

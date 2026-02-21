@@ -1,5 +1,5 @@
 # Summary
 
 - [Контекстная диаграмма](context-diagram.md)
-- [Пример использования Drawio](./drawio.md)
+- [CONOPS (Concept of Operation)](conops.md)
 - [Пример использования Swagger](./swagger.md)

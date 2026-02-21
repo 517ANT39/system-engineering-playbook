@@ -22,7 +22,7 @@ jobs:
       - name: Setup Rust
         uses: actions-rs/toolchain@v1
         with:
-          toolchain: stable
+          toolchain: 1.90
           profile: minimal
 
       - uses: Swatinem/rust-cache@v2
@@ -34,6 +34,11 @@ jobs:
           cd _tools/mdbook-drawio
           cargo build --release
           sudo cp target/release/mdbook-drawio /usr/local/bin/
+
+      - name: Add PlantUml Preprocessor
+        run: |
+          cargo install --version "1.0.0-rc.1" mdbook-plantuml 
+          sudo cp /home/runner/.cargo/bin/mdbook-plantuml /usr/local/bin/
 
       - name: Build Book
         run: mdbook build

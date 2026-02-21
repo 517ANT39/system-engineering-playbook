@@ -11,7 +11,9 @@ create-missing = true
 
 [preprocessor.drawio]
 command = "mdbook-drawio"
-
+[preprocessor.plantuml]
+plantuml-cmd="https://www.plantuml.com/plantuml"
+command = "mdbook-plantuml -l"
 
 [output.html]
 additional-css = ["src/_assets/custom.css"]

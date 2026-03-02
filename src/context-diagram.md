@@ -122,13 +122,21 @@
 
 ```plantuml
 @startuml
-skinparam defaultFontSize 12
-skinparam padding 8
-skinparam nodesep 80
-skinparam ranksep 100
+
+' ===== НАСТРОЙКИ МАСШТАБА И РАЗМЕРА =====
+scale 1.5
+skinparam dpi 150
+skinparam defaultFontSize 14
+skinparam padding 10
+skinparam nodesep 100
+skinparam ranksep 120
 skinparam rectangleBorderColor #555555
 skinparam actorBorderColor #555555
 skinparam backgroundColor #FEFEFE
+skinparam wrapWidth 200
+skinparam actorFontSize 14
+skinparam rectangleFontSize 13
+skinparam arrowFontSize 12
 
 title Контекстная диаграмма\nПлатформа электронного документооборота и согласования\n
 

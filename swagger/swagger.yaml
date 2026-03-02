@@ -1,31 +1,840 @@
-openapi: 3.0.0
+openapi: 3.1.0
 info:
-  title: API Documentation
+  title: Платформа электронного документооборота и согласования
+  description: |
+    Внешние интерфейсы платформы для взаимодействия клиентских приложений
+    (веб-интерфейс, мобильное приложение) с сервером приложений.
   version: 1.0.0
-  description: API documentation for the application
+  contact:
+    name: Команда разработки платформы
+
 servers:
-  - url: /api
-    description: API prefix
+  - url: https://edms.example.com/api/v1
+    description: Продуктивная среда
+  - url: https://edms-staging.example.com/api/v1
+    description: Тестовая среда
+
+tags:
+  - name: Documents
+    description: Создание и управление карточками документов
+  - name: Tasks
+    description: Работа с задачами согласования
+  - name: Signatures
+    description: Подписание документов электронной подписью
+
+# ===========================================================================
+# ОБЩИЕ КОМПОНЕНТЫ
+# ===========================================================================
+
+components:
+
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: |
+        Токен сессии, полученный при аутентификации через Модуль единого входа.
+        Передаётся в заголовке Authorization: Bearer <токен>.
+
+  schemas:
+
+    # --- Общая структура ошибки ---
+
+    ErrorResponse:
+      type: object
+      required:
+        - error_code
+        - message
+        - trace_id
+      properties:
+        error_code:
+          type: string
+          description: Машинно-читаемый код ошибки
+          example: BUDGET_LIMIT_EXCEEDED
+        message:
+          type: string
+          description: Человекочитаемое описание ошибки
+          example: Остаток по статье расходов меньше суммы заявки
+        details:
+          type: object
+          description: Дополнительные данные об ошибке (зависят от типа)
+          additionalProperties: true
+        trace_id:
+          type: string
+          format: uuid
+          description: Идентификатор для сквозной трассировки
+          example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+
+    # --- Текущий шаг маршрута ---
+
+    RouteStep:
+      type: object
+      properties:
+        role:
+          type: string
+          description: Роль назначенного участника
+          enum:
+            - lawyer
+            - approver
+            - accountant
+            - cfo
+            - hr_director
+            - tech_director
+          example: lawyer
+        assignee_id:
+          type: string
+          description: Идентификатор назначенного пользователя
+          example: user-111
+        deadline:
+          type: string
+          format: date-time
+          description: Крайний срок выполнения задачи
+          example: "2025-01-17T18:00:00+03:00"
+
+    # --- Карточка документа (ответ) ---
+
+    DocumentCreatedResponse:
+      type: object
+      required:
+        - document_id
+        - status
+        - version_number
+        - file_checksum
+        - current_step
+        - created_at
+      properties:
+        document_id:
+          type: string
+          description: Уникальный идентификатор карточки документа
+          example: doc-12345
+        status:
+          type: string
+          description: Статус документа
+          enum:
+            - on_approval
+          example: on_approval
+        version_number:
+          type: integer
+          description: Номер версии загруженного файла
+          example: 1
+        file_checksum:
+          type: string
+          description: >
+            Контрольная сумма файла (алгоритм хеширования
+            семейства Безопасный Алгоритм Хеширования с длиной 256 бит)
+          example: "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        current_step:
+          $ref: '#/components/schemas/RouteStep'
+        created_at:
+          type: string
+          format: date-time
+          description: Временная метка создания
+          example: "2025-01-15T10:30:00+03:00"
+
+    # --- Решение по задаче (ответ) ---
+
+    TaskDecisionResponse:
+      type: object
+      required:
+        - task_id
+        - decision
+        - document_status
+        - audit_event_id
+        - recorded_at
+      properties:
+        task_id:
+          type: string
+          description: Идентификатор обработанной задачи
+          example: task-67890
+        decision:
+          type: string
+          description: Принятое решение
+          enum:
+            - approve
+            - reject
+            - delegate
+            - vote_for
+            - vote_against
+            - vote_abstain
+            - vote_for_with_remarks
+          example: approve
+        document_status:
+          type: string
+          description: Новый статус документа после решения
+          enum:
+            - on_approval
+            - rework
+            - signing
+            - approved
+            - rejected
+          example: on_approval
+        next_step:
+          $ref: '#/components/schemas/RouteStep'
+          nullable: true
+          description: >
+            Следующий шаг маршрута (пусто, если маршрут завершён
+            или документ возвращён на доработку)
+        audit_event_id:
+          type: string
+          description: Идентификатор записи в журнале аудита
+          example: evt-audit-001
+        recorded_at:
+          type: string
+          format: date-time
+          description: Временная метка фиксации решения на сервере
+          example: "2025-01-16T11:00:00+03:00"
+
+    # --- Подпись документа (ответ) ---
+
+    SignatureResponse:
+      type: object
+      required:
+        - document_id
+        - signature_id
+        - signature_type
+        - file_checksum
+        - timestamp
+        - document_status
+        - audit_event_id
+      properties:
+        document_id:
+          type: string
+          description: Идентификатор документа
+          example: doc-12345
+        signature_id:
+          type: string
+          description: Уникальный идентификатор подписи
+          example: sig-99887
+        signature_type:
+          type: string
+          description: Тип наложенной подписи
+          enum:
+            - qualified
+            - enhanced_unqualified
+          example: qualified
+        file_checksum:
+          type: string
+          description: Контрольная сумма подписанного файла
+          example: "a1b2c3d4e5f6..."
+        certificate_serial:
+          type: string
+          nullable: true
+          description: >
+            Серийный номер сертификата
+            (только для Квалифицированной Электронной Подписи)
+          example: "0123456789ABCDEF"
+        timestamp:
+          type: string
+          format: date-time
+          description: Штамп времени от криптопровайдера
+          example: "2025-01-16T14:00:01+03:00"
+        document_status:
+          type: string
+          description: Новый статус документа
+          enum:
+            - signed
+            - awaiting_counterparty
+            - awaiting_signature_offline
+          example: signed
+        audit_event_id:
+          type: string
+          description: Идентификатор записи в журнале аудита
+          example: evt-audit-002
+
+  responses:
+
+    BadRequest:
+      description: Ошибка в данных запроса
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error_code: INVALID_DOCUMENT_TYPE
+            message: Указан неизвестный тип документа
+            details:
+              provided_type: unknown_type
+              allowed_types:
+                - contract
+                - memo
+                - payment_request
+                - policy
+            trace_id: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+
+    Unauthorized:
+      description: Не аутентифицирован (токен отсутствует или истёк)
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error_code: TOKEN_EXPIRED
+            message: Токен сессии истёк, выполните повторный вход
+            trace_id: a1b2c3d4-e5f6-7890-abcd-ef1234567891
+
+    Forbidden:
+      description: Нет прав на выполнение операции
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error_code: INSUFFICIENT_PERMISSIONS
+            message: "У пользователя нет роли Инициатор"
+            trace_id: a1b2c3d4-e5f6-7890-abcd-ef1234567892
+
+    NotFound:
+      description: Ресурс не найден
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error_code: TASK_NOT_FOUND
+            message: Задача не найдена или уже завершена
+            trace_id: a1b2c3d4-e5f6-7890-abcd-ef1234567893
+
+    Conflict:
+      description: Конфликт данных
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error_code: VERSION_CONFLICT
+            message: >
+              С момента открытия задачи загружена новая версия документа.
+              Скачайте актуальную версию.
+            details:
+              your_version: 1
+              current_version: 2
+              updated_by: user-333
+              updated_at: "2025-01-16T09:00:00+03:00"
+            trace_id: a1b2c3d4-e5f6-7890-abcd-ef1234567894
+
+    UnprocessableEntity:
+      description: Бизнес-правило нарушено
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error_code: BUDGET_LIMIT_EXCEEDED
+            message: Остаток по статье расходов меньше суммы заявки
+            details:
+              budget_remaining: 600000
+              requested_amount: 700000
+              cost_item: Закупка оборудования
+            trace_id: a1b2c3d4-e5f6-7890-abcd-ef1234567895
+
+    ExternalSystemUnavailable:
+      description: Внешняя система недоступна
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            error_code: CRYPTO_PROVIDER_UNAVAILABLE
+            message: >
+              Криптопровайдер недоступен.
+              Документ переведён в статус ожидания подписи.
+            details:
+              document_status: awaiting_signature_offline
+              retry_after_seconds: 300
+            trace_id: a1b2c3d4-e5f6-7890-abcd-ef1234567896
+
+security:
+  - BearerAuth: []
+
+# ===========================================================================
+# ЭНДПОИНТЫ
+# ===========================================================================
 
 paths:
-  /ping:
-    get:
+
+  # =========================================================================
+  # Контракт 1. Создание карточки документа и запуск маршрута
+  # =========================================================================
+
+  /documents:
+    post:
       tags:
-        - Health Check
+        - Documents
+      summary: Создание карточки документа и запуск маршрута согласования
+      description: |
+        Инициатор создаёт карточку документа с атрибутами и прикреплённым файлом.
+        Система автоматически определяет маршрут согласования по типу документа
+        (или по указанному шаблону маршрута) и формирует первую задачу.
+
+        Для типов `contract` и `payment_request` перед запуском маршрута
+        выполняется проверка контрагента в системе управления ресурсами
+        предприятия. Для `payment_request` дополнительно проверяется
+        бюджетный лимит по статье расходов.
+      operationId: createDocument
+      requestBody:
+        required: true
+        content:
+          schema:
+            type: object
+            required:
+              - document_type
+              - subject
+              - file
+            properties:
+              document_type:
+                type: string
+                description: Тип документа
+                enum:
+                  - contract
+                  - memo
+                  - payment_request
+                  - policy
+                example: contract
+              counterparty_id:
+                type: string
+                description: >
+                  Идентификатор контрагента в системе управления ресурсами
+                  предприятия. Обязателен для типов contract и payment_request.
+                example: cpty-456
+              amount:
+                type: number
+                format: double
+                description: >
+                  Сумма в рублях (до 2 знаков после разделителя).
+                  Обязательна для типов contract и payment_request.
+                example: 500000.00
+              subject:
+                type: string
+                maxLength: 500
+                description: Предмет документа
+                example: Поставка оборудования
+              cost_item:
+                type: string
+                description: >
+                  Статья расходов. Обязательна для типа payment_request.
+                example: Закупка оборудования
+              file:
+                type: string
+                format: binary
+                description: >
+                  Файл документа. Допустимые форматы: docx, pdf, xlsx.
+                  Максимальный размер: 100 мегабайт.
+              route_template_id:
+                type: string
+                description: >
+                  Идентификатор шаблона маршрута. Если не указан,
+                  определяется автоматически по типу документа.
+                example: tmpl-standard-contract
       responses:
-        "200":
+        '201':
+          description: Документ создан, маршрут запущен
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Ok"
+                $ref: '#/components/schemas/DocumentCreatedResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '422':
+          description: Бизнес-правило нарушено
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                counterparty_not_found:
+                  summary: Контрагент не найден
+                  value:
+                    error_code: COUNTERPARTY_NOT_FOUND
+                    message: >
+                      Контрагент не найден в системе управления ресурсами
+                      предприятия. Заведите контрагента и повторите попытку.
+                    details:
+                      counterparty_id: cpty-999
+                    trace_id: a1b2c3d4-e5f6-7890-abcd-000000000001
+                budget_exceeded:
+                  summary: Превышение бюджетного лимита
+                  value:
+                    error_code: BUDGET_LIMIT_EXCEEDED
+                    message: Остаток по статье расходов меньше суммы заявки
+                    details:
+                      budget_remaining: 600000
+                      requested_amount: 700000
+                      cost_item: Закупка оборудования
+                    trace_id: a1b2c3d4-e5f6-7890-abcd-000000000002
+        '502':
+          $ref: '#/components/responses/ExternalSystemUnavailable'
 
-components:
-  schemas:
-    Ok:
-      type: object
-      properties:
-        ok:
-          type: boolean
-          example: true
-      required:
-        - ok
+  # =========================================================================
+  # Контракт 2. Согласование / отклонение / голосование по задаче
+  # =========================================================================
+
+  /tasks/{task_id}/decision:
+    post:
+      tags:
+        - Tasks
+      summary: Принятие решения по задаче согласования
+      description: |
+        Согласующий, Юрист или иной участник маршрута принимает решение
+        по назначенной задаче.
+
+        Поддерживаемые решения:
+        - `approve` — согласовать (последовательный маршрут)
+        - `reject` — отклонить с обязательным комментарием
+        - `delegate` — делегировать заместителю
+        - `vote_for` — голос «За» (параллельный маршрут)
+        - `vote_against` — голос «Против» с обязательным комментарием
+        - `vote_abstain` — голос «Воздержался»
+        - `vote_for_with_remarks` — голос «За, с замечаниями» с обязательным комментарием
+
+        При передаче `expected_version` система проверяет, не была ли загружена
+        новая версия документа с момента открытия задачи пользователем.
+        В случае конфликта возвращается ошибка 409.
+
+        При передаче `offline_mode: true` и `X-Client-Timestamp` решение
+        фиксируется с пометкой «Подписано в оффлайн-режиме» и фактическим
+        временем принятия решения на устройстве.
+      operationId: submitTaskDecision
+      parameters:
+        - name: task_id
+          in: path
+          required: true
+          description: Идентификатор задачи
+          schema:
+            type: string
+          example: task-67890
+        - name: X-Client-Timestamp
+          in: header
+          required: false
+          description: >
+            Фактическое время принятия решения на клиентском устройстве.
+            Используется при оффлайн-синхронизации.
+          schema:
+            type: string
+            format: date-time
+          example: "2025-01-16T10:45:00+03:00"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - decision
+              properties:
+                decision:
+                  type: string
+                  description: Решение по задаче
+                  enum:
+                    - approve
+                    - reject
+                    - delegate
+                    - vote_for
+                    - vote_against
+                    - vote_abstain
+                    - vote_for_with_remarks
+                  example: approve
+                comment:
+                  type: string
+                  maxLength: 2000
+                  description: >
+                    Текстовый комментарий. Обязателен при решениях
+                    reject, vote_against, vote_for_with_remarks.
+                  example: ""
+                delegate_to:
+                  type: string
+                  description: >
+                    Идентификатор заместителя. Обязателен при решении delegate.
+                  example: user-555
+                offline_mode:
+                  type: boolean
+                  default: false
+                  description: >
+                    Признак того, что решение принято в оффлайн-режиме
+                    на мобильном устройстве.
+                  example: false
+                expected_version:
+                  type: integer
+                  description: >
+                    Номер версии документа, на которой основано решение.
+                    Используется для обнаружения конфликта версий.
+                  example: 2
+            examples:
+              approve:
+                summary: Согласование
+                value:
+                  decision: approve
+                  expected_version: 2
+              reject:
+                summary: Отклонение
+                value:
+                  decision: reject
+                  comment: "Неверная форма собственности контрагента"
+                  expected_version: 2
+              delegate:
+                summary: Делегирование
+                value:
+                  decision: delegate
+                  delegate_to: user-555
+              vote_for_with_remarks:
+                summary: Голос За с замечаниями
+                value:
+                  decision: vote_for_with_remarks
+                  comment: "Уточнить раздел 5"
+                  expected_version: 2
+              offline_approve:
+                summary: Согласование в оффлайн-режиме
+                value:
+                  decision: approve
+                  offline_mode: true
+                  expected_version: 2
+      responses:
+        '200':
+          description: Решение принято и зафиксировано
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskDecisionResponse'
+        '400':
+          description: Ошибка в данных запроса
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                comment_required:
+                  summary: Комментарий обязателен
+                  value:
+                    error_code: COMMENT_REQUIRED
+                    message: >
+                      Решение reject требует заполнения поля comment
+                    trace_id: a1b2c3d4-e5f6-7890-abcd-000000000003
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          description: Пользователь не назначен на задачу
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error_code: NOT_TASK_ASSIGNEE
+                message: Текущий пользователь не является назначенным на задачу
+                trace_id: a1b2c3d4-e5f6-7890-abcd-000000000004
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          $ref: '#/components/responses/Conflict'
+        '422':
+          description: Бизнес-правило нарушено
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                delegate_not_allowed:
+                  summary: Заместитель не найден
+                  value:
+                    error_code: DELEGATE_NOT_ALLOWED
+                    message: >
+                      Указанный заместитель не найден
+                      в Справочнике организационной структуры
+                    details:
+                      delegate_to: user-555
+                    trace_id: a1b2c3d4-e5f6-7890-abcd-000000000005
+                voting_closed:
+                  summary: Голосование завершено
+                  value:
+                    error_code: VOTING_CLOSED
+                    message: Голосование уже завершено по тайм-ауту
+                    details:
+                      closed_at: "2025-01-17T18:00:00+03:00"
+                      close_reason: timeout_policy_applied
+                    trace_id: a1b2c3d4-e5f6-7890-abcd-000000000006
+
+  # =========================================================================
+  # Контракт 3. Подписание документа электронной подписью
+  # =========================================================================
+
+  /documents/{document_id}/sign:
+    post:
+      tags:
+        - Signatures
+      summary: Подписание документа электронной подписью
+      description: |
+        Согласующий накладывает электронную подпись на документ.
+
+        Поддерживаются два типа подписи:
+        - `qualified` — Квалифицированная Электронная Подпись.
+          Требует указания идентификатора сертификата. Перед подписанием
+          система проверяет статус сертификата через протокол онлайн-проверки
+          статуса сертификата к криптопровайдеру.
+        - `enhanced_unqualified` — Усиленная Неквалифицированная Электронная
+          Подпись. Требует ввода кода подтверждения из короткого текстового
+          сообщения.
+
+        При недоступности криптопровайдера документ переводится в статус
+        «Ожидание подписи (оффлайн)» и ставится в очередь на подписание
+        при восстановлении (код ответа 502).
+      operationId: signDocument
+      parameters:
+        - name: document_id
+          in: path
+          required: true
+          description: Идентификатор карточки документа
+          schema:
+            type: string
+          example: doc-12345
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - signature_type
+                - version_number
+              properties:
+                signature_type:
+                  type: string
+                  description: Тип подписи
+                  enum:
+                    - qualified
+                    - enhanced_unqualified
+                  example: qualified
+                certificate_id:
+                  type: string
+                  description: >
+                    Идентификатор сертификата пользователя.
+                    Обязателен для типа qualified.
+                  example: cert-abc-123
+                sms_code:
+                  type: string
+                  description: >
+                    Код подтверждения из короткого текстового сообщения.
+                    Обязателен для типа enhanced_unqualified.
+                  example: "482916"
+                version_number:
+                  type: integer
+                  description: Номер версии подписываемого файла
+                  example: 2
+            examples:
+              qualified_signature:
+                summary: Квалифицированная Электронная Подпись
+                value:
+                  signature_type: qualified
+                  certificate_id: cert-abc-123
+                  version_number: 2
+              unqualified_signature:
+                summary: Усиленная Неквалифицированная Электронная Подпись
+                value:
+                  signature_type: enhanced_unqualified
+                  sms_code: "482916"
+                  version_number: 2
+      responses:
+        '200':
+          description: Документ успешно подписан
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SignatureResponse'
+        '400':
+          description: Ошибка в данных запроса
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                invalid_sms_code:
+                  summary: Неверный код подтверждения
+                  value:
+                    error_code: INVALID_SMS_CODE
+                    message: Код подтверждения неверен или истёк
+                    trace_id: a1b2c3d4-e5f6-7890-abcd-000000000007
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          description: Нет прав на подписание
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error_code: NOT_AUTHORIZED_TO_SIGN
+                message: У пользователя нет прав на подписание этого документа
+                trace_id: a1b2c3d4-e5f6-7890-abcd-000000000008
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          description: Конфликт версий
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error_code: VERSION_MISMATCH
+                message: >
+                  Указанная версия не совпадает с текущей версией документа
+                details:
+                  requested_version: 1
+                  current_version: 2
+                trace_id: a1b2c3d4-e5f6-7890-abcd-000000000009
+        '422':
+          description: Проблема с сертификатом
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                certificate_revoked:
+                  summary: Сертификат отозван
+                  value:
+                    error_code: CERTIFICATE_REVOKED
+                    message: >
+                      Сертификат отозван. Обратитесь в удостоверяющий центр
+                      для перевыпуска или делегируйте подписание заместителю.
+                    details:
+                      certificate_id: cert-abc-123
+                      revocation_date: "2025-01-10T00:00:00+03:00"
+                    trace_id: a1b2c3d4-e5f6-7890-abcd-000000000010
+                certificate_expired:
+                  summary: Сертификат истёк
+                  value:
+                    error_code: CERTIFICATE_EXPIRED
+                    message: Срок действия сертификата истёк
+                    details:
+                      certificate_id: cert-abc-123
+                      expired_at: "2025-01-01T00:00:00+03:00"
+                    trace_id: a1b2c3d4-e5f6-7890-abcd-000000000011
+                certificate_not_found:
+                  summary: Сертификат не найден
+                  value:
+                    error_code: CERTIFICATE_NOT_FOUND
+                    message: >
+                      Сертификат не найден на устройстве.
+                      Задача переведена в статус ожидания подписи
+                      с персонального компьютера.
+                    details:
+                      fallback_status: awaiting_signature_from_pc
+                      deadline: "2025-01-17T14:00:00+03:00"
+                    trace_id: a1b2c3d4-e5f6-7890-abcd-000000000012
+        '502':
+          description: Криптопровайдер недоступен
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error_code: CRYPTO_PROVIDER_UNAVAILABLE
+                message: >
+                  Криптопровайдер недоступен. Документ переведён в статус
+                  ожидания подписи и будет подписан автоматически
+                  при восстановлении.
+                details:
+                  document_status: awaiting_signature_offline
+                  queued: true
+                  retry_after_seconds: 300
+                trace_id: a1b2c3d4-e5f6-7890-abcd-000000000013

@@ -1,0 +1,1174 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>Protocol Documentation</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Ubuntu:400,700,400italic"/>
+    <style>
+      body {
+        width: 60em;
+        margin: 1em auto;
+        color: #222;
+        font-family: "Ubuntu", sans-serif;
+        padding-bottom: 4em;
+      }
+
+      h1 {
+        font-weight: normal;
+        border-bottom: 1px solid #aaa;
+        padding-bottom: 0.5ex;
+      }
+
+      h2 {
+        border-bottom: 1px solid #aaa;
+        padding-bottom: 0.5ex;
+        margin: 1.5em 0;
+      }
+
+      h3 {
+        font-weight: normal;
+        border-bottom: 1px solid #aaa;
+        padding-bottom: 0.5ex;
+      }
+
+      a {
+        text-decoration: none;
+        color: #567e25;
+      }
+
+      table {
+        width: 100%;
+        font-size: 80%;
+        border-collapse: collapse;
+      }
+
+      thead {
+        font-weight: 700;
+        background-color: #dcdcdc;
+      }
+
+      tbody tr:nth-child(even) {
+        background-color: #fbfbfb;
+      }
+
+      td {
+        border: 1px solid #ccc;
+        padding: 0.5ex 2ex;
+      }
+
+      td p {
+        text-indent: 1em;
+        margin: 0;
+      }
+
+      td p:nth-child(1) {
+        text-indent: 0;  
+      }
+
+       
+      .field-table td:nth-child(1) {  
+        width: 10em;
+      }
+      .field-table td:nth-child(2) {  
+        width: 10em;
+      }
+      .field-table td:nth-child(3) {  
+        width: 6em;
+      }
+      .field-table td:nth-child(4) {  
+        width: auto;
+      }
+
+       
+      .extension-table td:nth-child(1) {  
+        width: 10em;
+      }
+      .extension-table td:nth-child(2) {  
+        width: 10em;
+      }
+      .extension-table td:nth-child(3) {  
+        width: 10em;
+      }
+      .extension-table td:nth-child(4) {  
+        width: 5em;
+      }
+      .extension-table td:nth-child(5) {  
+        width: auto;
+      }
+
+       
+      .enum-table td:nth-child(1) {  
+        width: 10em;
+      }
+      .enum-table td:nth-child(2) {  
+        width: 10em;
+      }
+      .enum-table td:nth-child(3) {  
+        width: auto;
+      }
+
+       
+      .scalar-value-types-table tr {
+        height: 3em;
+      }
+
+       
+      #toc-container ul {
+        list-style-type: none;
+        padding-left: 1em;
+        line-height: 180%;
+        margin: 0;
+      }
+      #toc > li > a {
+        font-weight: bold;
+      }
+
+       
+      .file-heading {
+        width: 100%;
+        display: table;
+        border-bottom: 1px solid #aaa;
+        margin: 4em 0 1.5em 0;
+      }
+      .file-heading h2 {
+        border: none;
+        display: table-cell;
+      }
+      .file-heading a {
+        text-align: right;
+        display: table-cell;
+      }
+
+       
+      .badge {
+        width: 1.6em;
+        height: 1.6em;
+        display: inline-block;
+
+        line-height: 1.6em;
+        text-align: center;
+        font-weight: bold;
+        font-size: 60%;
+
+        color: #89ba48;
+        background-color: #dff0c8;
+
+        margin: 0.5ex 1em 0.5ex -1em;
+        border: 1px solid #fbfbfb;
+        border-radius: 1ex;
+      }
+    </style>
+
+    
+    <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+  </head>
+
+  <body>
+
+    <h1 id="title">Protocol Documentation</h1>
+
+    <h2>Table of Contents</h2>
+
+    <div id="toc-container">
+      <ul id="toc">
+        
+          
+          <li>
+            <a href="#events.proto">events.proto</a>
+            <ul>
+              
+                <li>
+                  <a href="#edms.events.DocumentSignedEvent"><span class="badge">M</span>DocumentSignedEvent</a>
+                </li>
+              
+                <li>
+                  <a href="#edms.events.EventEnvelope"><span class="badge">M</span>EventEnvelope</a>
+                </li>
+              
+                <li>
+                  <a href="#edms.events.ExternalRestoredEvent"><span class="badge">M</span>ExternalRestoredEvent</a>
+                </li>
+              
+                <li>
+                  <a href="#edms.events.ExternalUnavailableEvent"><span class="badge">M</span>ExternalUnavailableEvent</a>
+                </li>
+              
+                <li>
+                  <a href="#edms.events.TaskCreatedEvent"><span class="badge">M</span>TaskCreatedEvent</a>
+                </li>
+              
+              
+                <li>
+                  <a href="#edms.events.AffectedOperation"><span class="badge">E</span>AffectedOperation</a>
+                </li>
+              
+                <li>
+                  <a href="#edms.events.AssigneeRole"><span class="badge">E</span>AssigneeRole</a>
+                </li>
+              
+                <li>
+                  <a href="#edms.events.DetectionMethod"><span class="badge">E</span>DetectionMethod</a>
+                </li>
+              
+                <li>
+                  <a href="#edms.events.DocumentType"><span class="badge">E</span>DocumentType</a>
+                </li>
+              
+                <li>
+                  <a href="#edms.events.ExternalSystem"><span class="badge">E</span>ExternalSystem</a>
+                </li>
+              
+                <li>
+                  <a href="#edms.events.SignatureType"><span class="badge">E</span>SignatureType</a>
+                </li>
+              
+                <li>
+                  <a href="#edms.events.StepType"><span class="badge">E</span>StepType</a>
+                </li>
+              
+                <li>
+                  <a href="#edms.events.TaskPriority"><span class="badge">E</span>TaskPriority</a>
+                </li>
+              
+              
+              
+            </ul>
+          </li>
+        
+        <li><a href="#scalar-value-types">Scalar Value Types</a></li>
+      </ul>
+    </div>
+
+    
+      
+      <div class="file-heading">
+        <h2 id="events.proto">events.proto</h2><a href="#title">Top</a>
+      </div>
+      <p></p>
+
+      
+        <h3 id="edms.events.DocumentSignedEvent">DocumentSignedEvent</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>document_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Идентификатор карточки документа. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>signature_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Уникальный идентификатор подписи. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>signer_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Идентификатор пользователя, подписавшего документ. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>signer_role</td>
+                  <td><a href="#edms.events.AssigneeRole">AssigneeRole</a></td>
+                  <td></td>
+                  <td><p>Роль подписанта. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>signature_type</td>
+                  <td><a href="#edms.events.SignatureType">SignatureType</a></td>
+                  <td></td>
+                  <td><p>Тип наложенной подписи. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>file_checksum</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Контрольная сумма подписанного файла
+(алгоритм хеширования семейства Безопасный Алгоритм Хеширования
+ с длиной 256 бит).
+Используется для верификации целостности. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>certificate_serial</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Серийный номер сертификата.
+Заполняется только при signature_type = SIGNATURE_TYPE_QUALIFIED. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>crypto_timestamp</td>
+                  <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
+                  <td></td>
+                  <td><p>Штамп времени от криптопровайдера.
+Заполняется только при signature_type = SIGNATURE_TYPE_QUALIFIED. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>version_number</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>Номер подписанной версии файла. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>all_internal_signatures_collected</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>Признак того, что все внутренние подписи по маршруту собраны.
+При true — документ готов к отправке контрагенту
+(если тип документа предполагает внешний обмен). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>document_type</td>
+                  <td><a href="#edms.events.DocumentType">DocumentType</a></td>
+                  <td></td>
+                  <td><p>Тип документа (для определения необходимости отправки контрагенту). </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="edms.events.EventEnvelope">EventEnvelope</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>event_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Уникальный идентификатор события (для идемпотентности).
+Формат: строка в формате универсального уникального идентификатора версии 4. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>event_type</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Тип события — определяет, какое поле в oneof payload заполнено. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>correlation_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Идентификатор корреляции — связывает цепочку событий
+по одному документу или бизнес-процессу. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>timestamp</td>
+                  <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
+                  <td></td>
+                  <td><p>Временная метка создания события. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>source</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Имя сервиса-источника, сформировавшего событие. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>task_created</td>
+                  <td><a href="#edms.events.TaskCreatedEvent">TaskCreatedEvent</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>document_signed</td>
+                  <td><a href="#edms.events.DocumentSignedEvent">DocumentSignedEvent</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>external_unavailable</td>
+                  <td><a href="#edms.events.ExternalUnavailableEvent">ExternalUnavailableEvent</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>external_restored</td>
+                  <td><a href="#edms.events.ExternalRestoredEvent">ExternalRestoredEvent</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="edms.events.ExternalRestoredEvent">ExternalRestoredEvent</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>external_system</td>
+                  <td><a href="#edms.events.ExternalSystem">ExternalSystem</a></td>
+                  <td></td>
+                  <td><p>Идентификатор восстановленной внешней системы. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>downtime_duration_seconds</td>
+                  <td><a href="#int64">int64</a></td>
+                  <td></td>
+                  <td><p>Продолжительность недоступности в секундах. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>pending_operations_count</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>Количество операций в очереди, ожидавших восстановления. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>sync_started</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>Признак того, что автоматическая синхронизация запущена. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="edms.events.ExternalUnavailableEvent">ExternalUnavailableEvent</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>external_system</td>
+                  <td><a href="#edms.events.ExternalSystem">ExternalSystem</a></td>
+                  <td></td>
+                  <td><p>Идентификатор внешней системы, которая стала недоступна. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>detection_method</td>
+                  <td><a href="#edms.events.DetectionMethod">DetectionMethod</a></td>
+                  <td></td>
+                  <td><p>Способ обнаружения недоступности. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>last_successful_contact</td>
+                  <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
+                  <td></td>
+                  <td><p>Временная метка последнего успешного взаимодействия с внешней системой. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>affected_operations</td>
+                  <td><a href="#edms.events.AffectedOperation">AffectedOperation</a></td>
+                  <td>repeated</td>
+                  <td><p>Список операций, затронутых недоступностью. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>fallback_activated</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>Признак того, что резервный режим активирован автоматически. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>fallback_description</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Описание активированного резервного режима.
+Заполняется при fallback_activated = true. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="edms.events.TaskCreatedEvent">TaskCreatedEvent</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>task_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Идентификатор созданной задачи. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>document_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Идентификатор карточки документа, к которому относится задача. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>document_type</td>
+                  <td><a href="#edms.events.DocumentType">DocumentType</a></td>
+                  <td></td>
+                  <td><p>Тип документа. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>document_subject</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Предмет документа (для отображения в тексте уведомления).
+Максимум 500 символов. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>initiator_name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Полное имя Инициатора документа. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>assignee_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Идентификатор пользователя, которому назначена задача. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>assignee_role</td>
+                  <td><a href="#edms.events.AssigneeRole">AssigneeRole</a></td>
+                  <td></td>
+                  <td><p>Роль назначенного пользователя. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>deadline</td>
+                  <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
+                  <td></td>
+                  <td><p>Крайний срок выполнения задачи. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>step_type</td>
+                  <td><a href="#edms.events.StepType">StepType</a></td>
+                  <td></td>
+                  <td><p>Тип шага маршрута. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>priority</td>
+                  <td><a href="#edms.events.TaskPriority">TaskPriority</a></td>
+                  <td></td>
+                  <td><p>Приоритет задачи. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+
+      
+        <h3 id="edms.events.AffectedOperation">AffectedOperation</h3>
+        <p>Операция, затронутая недоступностью внешней системы.</p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>AFFECTED_OPERATION_UNSPECIFIED</td>
+                <td>0</td>
+                <td><p>Не указана (ошибка)</p></td>
+              </tr>
+            
+              <tr>
+                <td>AFFECTED_OPERATION_AUTHENTICATION</td>
+                <td>1</td>
+                <td><p>Аутентификация пользователей</p></td>
+              </tr>
+            
+              <tr>
+                <td>AFFECTED_OPERATION_BUDGET_CHECK</td>
+                <td>2</td>
+                <td><p>Проверка бюджетных лимитов</p></td>
+              </tr>
+            
+              <tr>
+                <td>AFFECTED_OPERATION_SIGNING</td>
+                <td>3</td>
+                <td><p>Подписание документов</p></td>
+              </tr>
+            
+              <tr>
+                <td>AFFECTED_OPERATION_SENDING_TO_COUNTERPARTY</td>
+                <td>4</td>
+                <td><p>Отправка контрагенту</p></td>
+              </tr>
+            
+              <tr>
+                <td>AFFECTED_OPERATION_NOTIFICATION_DELIVERY</td>
+                <td>5</td>
+                <td><p>Доставка уведомлений</p></td>
+              </tr>
+            
+              <tr>
+                <td>AFFECTED_OPERATION_ORGSTRUCTURE_SYNC</td>
+                <td>6</td>
+                <td><p>Синхронизация</p></td>
+              </tr>
+            
+              <tr>
+                <td>AFFECTED_OPERATION_ARCHIVING</td>
+                <td>7</td>
+                <td><p>организационной структуры
+
+Передача в архив</p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="edms.events.AssigneeRole">AssigneeRole</h3>
+        <p>Роль участника маршрута.</p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ASSIGNEE_ROLE_UNSPECIFIED</td>
+                <td>0</td>
+                <td><p>Не указана (ошибка)</p></td>
+              </tr>
+            
+              <tr>
+                <td>ASSIGNEE_ROLE_LAWYER</td>
+                <td>1</td>
+                <td><p>Юрист</p></td>
+              </tr>
+            
+              <tr>
+                <td>ASSIGNEE_ROLE_APPROVER</td>
+                <td>2</td>
+                <td><p>Согласующий (руководитель)</p></td>
+              </tr>
+            
+              <tr>
+                <td>ASSIGNEE_ROLE_ACCOUNTANT</td>
+                <td>3</td>
+                <td><p>Бухгалтер</p></td>
+              </tr>
+            
+              <tr>
+                <td>ASSIGNEE_ROLE_CFO</td>
+                <td>4</td>
+                <td><p>Финансовый директор</p></td>
+              </tr>
+            
+              <tr>
+                <td>ASSIGNEE_ROLE_HR_DIRECTOR</td>
+                <td>5</td>
+                <td><p>Директор по персоналу</p></td>
+              </tr>
+            
+              <tr>
+                <td>ASSIGNEE_ROLE_TECH_DIRECTOR</td>
+                <td>6</td>
+                <td><p>Технический директор</p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="edms.events.DetectionMethod">DetectionMethod</h3>
+        <p>Способ обнаружения недоступности внешней системы.</p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>DETECTION_METHOD_UNSPECIFIED</td>
+                <td>0</td>
+                <td><p>Не указан (ошибка)</p></td>
+              </tr>
+            
+              <tr>
+                <td>DETECTION_METHOD_HEALTH_CHECK</td>
+                <td>1</td>
+                <td><p>Плановая проверка доступности</p></td>
+              </tr>
+            
+              <tr>
+                <td>DETECTION_METHOD_REQUEST_TIMEOUT</td>
+                <td>2</td>
+                <td><p>Превышение времени ожидания</p></td>
+              </tr>
+            
+              <tr>
+                <td>DETECTION_METHOD_CONNECTION_REFUSED</td>
+                <td>3</td>
+                <td><p>ответа при запросе
+
+Отказ в соединении</p></td>
+              </tr>
+            
+              <tr>
+                <td>DETECTION_METHOD_ERROR_RESPONSE</td>
+                <td>4</td>
+                <td><p>Ответ с ошибкой от внешней системы</p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="edms.events.DocumentType">DocumentType</h3>
+        <p>Тип документа.</p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>DOCUMENT_TYPE_UNSPECIFIED</td>
+                <td>0</td>
+                <td><p>Не указан (ошибка)</p></td>
+              </tr>
+            
+              <tr>
+                <td>DOCUMENT_TYPE_CONTRACT</td>
+                <td>1</td>
+                <td><p>Договор</p></td>
+              </tr>
+            
+              <tr>
+                <td>DOCUMENT_TYPE_MEMO</td>
+                <td>2</td>
+                <td><p>Служебная записка</p></td>
+              </tr>
+            
+              <tr>
+                <td>DOCUMENT_TYPE_PAYMENT_REQUEST</td>
+                <td>3</td>
+                <td><p>Заявка на оплату</p></td>
+              </tr>
+            
+              <tr>
+                <td>DOCUMENT_TYPE_POLICY</td>
+                <td>4</td>
+                <td><p>Политика / Положение</p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="edms.events.ExternalSystem">ExternalSystem</h3>
+        <p>Идентификатор внешней системы.</p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>EXTERNAL_SYSTEM_UNSPECIFIED</td>
+                <td>0</td>
+                <td><p>Не указана (ошибка)</p></td>
+              </tr>
+            
+              <tr>
+                <td>EXTERNAL_SYSTEM_LDAP</td>
+                <td>1</td>
+                <td><p>Корпоративная служба каталогов</p></td>
+              </tr>
+            
+              <tr>
+                <td>EXTERNAL_SYSTEM_HR</td>
+                <td>2</td>
+                <td><p>Система управления персоналом</p></td>
+              </tr>
+            
+              <tr>
+                <td>EXTERNAL_SYSTEM_ERP</td>
+                <td>3</td>
+                <td><p>Система управления ресурсами</p></td>
+              </tr>
+            
+              <tr>
+                <td>EXTERNAL_SYSTEM_CRYPTO_PROVIDER</td>
+                <td>4</td>
+                <td><p>предприятия
+
+Криптопровайдер</p></td>
+              </tr>
+            
+              <tr>
+                <td>EXTERNAL_SYSTEM_EDO_OPERATOR</td>
+                <td>5</td>
+                <td><p>Оператор электронного</p></td>
+              </tr>
+            
+              <tr>
+                <td>EXTERNAL_SYSTEM_NOTIFICATION_GATEWAY</td>
+                <td>6</td>
+                <td><p>документооборота
+
+Шлюз уведомлений</p></td>
+              </tr>
+            
+              <tr>
+                <td>EXTERNAL_SYSTEM_ARCHIVE</td>
+                <td>7</td>
+                <td><p>Долговременный архив</p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="edms.events.SignatureType">SignatureType</h3>
+        <p>Тип электронной подписи.</p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>SIGNATURE_TYPE_UNSPECIFIED</td>
+                <td>0</td>
+                <td><p>Не указан (ошибка)</p></td>
+              </tr>
+            
+              <tr>
+                <td>SIGNATURE_TYPE_QUALIFIED</td>
+                <td>1</td>
+                <td><p>Квалифицированная Электронная Подпись</p></td>
+              </tr>
+            
+              <tr>
+                <td>SIGNATURE_TYPE_ENHANCED_UNQUALIFIED</td>
+                <td>2</td>
+                <td><p>Усиленная Неквалифицированная</p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="edms.events.StepType">StepType</h3>
+        <p>Тип шага маршрута.</p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>STEP_TYPE_UNSPECIFIED</td>
+                <td>0</td>
+                <td><p>Не указан (ошибка)</p></td>
+              </tr>
+            
+              <tr>
+                <td>STEP_TYPE_SEQUENTIAL</td>
+                <td>1</td>
+                <td><p>Последовательный (один участник за другим)</p></td>
+              </tr>
+            
+              <tr>
+                <td>STEP_TYPE_PARALLEL_VOTE</td>
+                <td>2</td>
+                <td><p>Параллельный (одновременное голосование)</p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="edms.events.TaskPriority">TaskPriority</h3>
+        <p>Приоритет задачи.</p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>PRIORITY_UNSPECIFIED</td>
+                <td>0</td>
+                <td><p>Не указан (ошибка)</p></td>
+              </tr>
+            
+              <tr>
+                <td>PRIORITY_NORMAL</td>
+                <td>1</td>
+                <td><p>Обычный</p></td>
+              </tr>
+            
+              <tr>
+                <td>PRIORITY_URGENT</td>
+                <td>2</td>
+                <td><p>Срочный (дополнительно отправляется</p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+
+      
+
+      
+    
+
+    <h2 id="scalar-value-types">Scalar Value Types</h2>
+    <table class="scalar-value-types-table">
+      <thead>
+        <tr><td>.proto Type</td><td>Notes</td><td>C++</td><td>Java</td><td>Python</td><td>Go</td><td>C#</td><td>PHP</td><td>Ruby</td></tr>
+      </thead>
+      <tbody>
+        
+          <tr id="double">
+            <td>double</td>
+            <td></td>
+            <td>double</td>
+            <td>double</td>
+            <td>float</td>
+            <td>float64</td>
+            <td>double</td>
+            <td>float</td>
+            <td>Float</td>
+          </tr>
+        
+          <tr id="float">
+            <td>float</td>
+            <td></td>
+            <td>float</td>
+            <td>float</td>
+            <td>float</td>
+            <td>float32</td>
+            <td>float</td>
+            <td>float</td>
+            <td>Float</td>
+          </tr>
+        
+          <tr id="int32">
+            <td>int32</td>
+            <td>Uses variable-length encoding. Inefficient for encoding negative numbers – if your field is likely to have negative values, use sint32 instead.</td>
+            <td>int32</td>
+            <td>int</td>
+            <td>int</td>
+            <td>int32</td>
+            <td>int</td>
+            <td>integer</td>
+            <td>Bignum or Fixnum (as required)</td>
+          </tr>
+        
+          <tr id="int64">
+            <td>int64</td>
+            <td>Uses variable-length encoding. Inefficient for encoding negative numbers – if your field is likely to have negative values, use sint64 instead.</td>
+            <td>int64</td>
+            <td>long</td>
+            <td>int/long</td>
+            <td>int64</td>
+            <td>long</td>
+            <td>integer/string</td>
+            <td>Bignum</td>
+          </tr>
+        
+          <tr id="uint32">
+            <td>uint32</td>
+            <td>Uses variable-length encoding.</td>
+            <td>uint32</td>
+            <td>int</td>
+            <td>int/long</td>
+            <td>uint32</td>
+            <td>uint</td>
+            <td>integer</td>
+            <td>Bignum or Fixnum (as required)</td>
+          </tr>
+        
+          <tr id="uint64">
+            <td>uint64</td>
+            <td>Uses variable-length encoding.</td>
+            <td>uint64</td>
+            <td>long</td>
+            <td>int/long</td>
+            <td>uint64</td>
+            <td>ulong</td>
+            <td>integer/string</td>
+            <td>Bignum or Fixnum (as required)</td>
+          </tr>
+        
+          <tr id="sint32">
+            <td>sint32</td>
+            <td>Uses variable-length encoding. Signed int value. These more efficiently encode negative numbers than regular int32s.</td>
+            <td>int32</td>
+            <td>int</td>
+            <td>int</td>
+            <td>int32</td>
+            <td>int</td>
+            <td>integer</td>
+            <td>Bignum or Fixnum (as required)</td>
+          </tr>
+        
+          <tr id="sint64">
+            <td>sint64</td>
+            <td>Uses variable-length encoding. Signed int value. These more efficiently encode negative numbers than regular int64s.</td>
+            <td>int64</td>
+            <td>long</td>
+            <td>int/long</td>
+            <td>int64</td>
+            <td>long</td>
+            <td>integer/string</td>
+            <td>Bignum</td>
+          </tr>
+        
+          <tr id="fixed32">
+            <td>fixed32</td>
+            <td>Always four bytes. More efficient than uint32 if values are often greater than 2^28.</td>
+            <td>uint32</td>
+            <td>int</td>
+            <td>int</td>
+            <td>uint32</td>
+            <td>uint</td>
+            <td>integer</td>
+            <td>Bignum or Fixnum (as required)</td>
+          </tr>
+        
+          <tr id="fixed64">
+            <td>fixed64</td>
+            <td>Always eight bytes. More efficient than uint64 if values are often greater than 2^56.</td>
+            <td>uint64</td>
+            <td>long</td>
+            <td>int/long</td>
+            <td>uint64</td>
+            <td>ulong</td>
+            <td>integer/string</td>
+            <td>Bignum</td>
+          </tr>
+        
+          <tr id="sfixed32">
+            <td>sfixed32</td>
+            <td>Always four bytes.</td>
+            <td>int32</td>
+            <td>int</td>
+            <td>int</td>
+            <td>int32</td>
+            <td>int</td>
+            <td>integer</td>
+            <td>Bignum or Fixnum (as required)</td>
+          </tr>
+        
+          <tr id="sfixed64">
+            <td>sfixed64</td>
+            <td>Always eight bytes.</td>
+            <td>int64</td>
+            <td>long</td>
+            <td>int/long</td>
+            <td>int64</td>
+            <td>long</td>
+            <td>integer/string</td>
+            <td>Bignum</td>
+          </tr>
+        
+          <tr id="bool">
+            <td>bool</td>
+            <td></td>
+            <td>bool</td>
+            <td>boolean</td>
+            <td>boolean</td>
+            <td>bool</td>
+            <td>bool</td>
+            <td>boolean</td>
+            <td>TrueClass/FalseClass</td>
+          </tr>
+        
+          <tr id="string">
+            <td>string</td>
+            <td>A string must always contain UTF-8 encoded or 7-bit ASCII text.</td>
+            <td>string</td>
+            <td>String</td>
+            <td>str/unicode</td>
+            <td>string</td>
+            <td>string</td>
+            <td>string</td>
+            <td>String (UTF-8)</td>
+          </tr>
+        
+          <tr id="bytes">
+            <td>bytes</td>
+            <td>May contain any arbitrary sequence of bytes.</td>
+            <td>string</td>
+            <td>ByteString</td>
+            <td>str</td>
+            <td>[]byte</td>
+            <td>ByteString</td>
+            <td>string</td>
+            <td>String (ASCII-8BIT)</td>
+          </tr>
+        
+      </tbody>
+    </table>
+  </body>
+</html>
+

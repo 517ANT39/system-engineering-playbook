@@ -14,3 +14,7 @@
 .content main:has(h2[id='4-Архитектура']) {
     max-width:fit-content;
 }
+
+.content main:has(h2[id="1-Контекст-и-границы"]){
+   max-width:fit-content;
+}

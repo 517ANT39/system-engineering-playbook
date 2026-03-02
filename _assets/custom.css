@@ -18,3 +18,7 @@
 .content main:has(h2[id="1-Контекст-и-границы"]){
    max-width:fit-content;
 }
+
+.content main:has(h2[id="6-Риски"]){
+   max-width:fit-content;
+}

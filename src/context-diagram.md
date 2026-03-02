@@ -1,4 +1,257 @@
-## Контекстная диаграмма
+## 1. Контекст и границы
 
+### 1.1 Описание системы
 
-<iframe src="https://dreampuf.github.io/GraphvizOnline/?engine=circo&compressed=CYSw5gTghgDgFgAgMIHsB2AXApgDwwERCkigFsEBvAKAQQHo6EBeF1lhQZBBBsEEDwQQRBBACCBdANCCBcEEDUIIFQQBKIGBCEEBEIIAIQHoEwQQFgggDBBmbVjQTQ0Aa1AQmAGQBKAbn0AjMAGMUAGxRmARAGIAYgFZ-fw9bWgAzdAw0MiwmDwBBCCIXYP1wzABnEAAvGIBGXJCEZ1IYFABXNGAmDAgyrEK0FGAsdKwYJgAmADoABkLDI1b2v17CmCgqnq6-QtIQSpB0jCYAZlGqfQYEOUAhEEAOEEBuED2EQH4QQD4QBEBhEEAeEDODwHEQQAYQQF4QPcA5EH1G5oQAbTTI6KxBJJDwAGgQ-0yOSYuR64JgWDQAHcQMAMHAYdMALqFLDAMBYX7-KKkGLxRJQZLgyHZGIADnhiJRaIxuS6HRxG1oW0ACqR8-kCwVC4UigWbRgIQBkIJJRMohGIBIB6EG2mkUkkAOCACBAACgAChAUI4WukED0AJTi2gAZStAHkEDtAKwgJ0dgAEQQAyIAhAPIggCYQZ4XS6ALhBHoB2EBeCGDgYQfsuO1djuer0AnCAIW6AFhBLgd3ZbRbm87n9LqXFAMOEIOQfvpaOk4LAYlgXC4QDBWqCqwglgBPFxk0IgRt40F2VzAMHtvuN5xuTxeABCK3wAE4fD4x7RaFP3LEvLk4n4OgB2ABsa-XCORqPRnWmbfXCGZV7WDPbcCw4Dgy26HVv6%2BLdgbTAADyAQAKnEs7mAAoggs62pY%2BCQZYsQ9B4yCQeY5iwfBiHIahSDoeYVq6nESAAJIAHIAOKxB0HgAHztrQoGWHRoH4Kxs50YA%2BCAHI8OyACIgZyutcjwIGmZyBjcCY7GcZyAIwgQlnDsjyAXQnGqSB7EaSxjEIMxrGaRxdHHIAgiBnIAzCC8WZPovHsSaqepdCGdpDF3kxIEsWxrE%2BLa5EgQguq2hRIEALRWqRABakGxHSeG2uYcHbn4yUpfRgAApBlmVZdlqk%2BX5rFOVpTk6W5ekeQZWl5f5gXBWFkXRR4B5xQlSHeLu%2B7HvR6qPK6gASIK6sZ7GGMmuggADtCBKM6ZwhnsI12eNCDqIAtCBcXQgDEIKIq25b5IEFc5xWuW5%2BleYBVUBUFfl1VFsRNcg8WJW1e6HiedHqmcGZZggjyxtJez8XswaAGIgezHNqNq2mai0CJcaZzTt%2BUaUV5W6SdznnTVV3hTdjXNY9O7PZ1dHrT6jridcBwJnsXqLctgAoIDw0OuoAoiB7DZINegje1I-tJXrhp4FQXRR2cjm%2BbixLloIIASCCiJIgAUIKImjSHI62AJQgog8IomgAFwIFwgB0IHT2iMCoXCaGLEtW6K%2BjpGUDjQPARQuGUSxYBAAD6CIoDAPaUO2f4AcBnGALwbgCmO9sTpJoGzN3GmbqANIgOquncexmg5wuFLQgcuAAVq7ywuFnHYYN2ZLAFANZ4ikd6bjOHSQXSR5ILkNfrsSgLkiCxc0tC%2BTFw4dfbpBs6BLOKTtl8hI-DWdZMMOODgl2PaxBOPbAKCBoVM0o7Uv2LhD94%2BBHpBcQ%2BLF4KH14DdNy3Hii3epFoCAGBEBg7jrj8OdAaBgvQVhCFWooTQhhABOEPAoSOneNG7EQ6AF2dvSnFNCvBBnxISGceYuVRuVU6GNLqhWxg1WKdE5BKQGmmV4gYQphl9HNR0WYub7WRnzJiTk-7CwfuuOIMAYAGgAG7uzvF-KA-4XA-zAhBf%2BcFAG4RAZhaR4DIHYM8oZQAoOSIJIRZKylw3iAEkQOyGDCq8ygfzHB6NdoXVqoQmK9ElBBjOD6D6dCvqMEAOggjxriOhMvsJ0DC6BVSYcY9sAtJEcNsO2cwUAkSdkEW5YRojxF-xggooBeECJgNSSY9yKj2KADSyQA8H8aINq6PY3jDEHRRqVGB3kLGYwIfVGxdFil7DhvcLxgYFrxxOD1ZSnjng7EYZgw6wS2GhLopw2gcRHDOAqBgKAmBaDxKDr-SRyTsKpLkRk3CWSyo5LoiHQADTsaL4JcZm5lHgHCdK6cpzCdnVLOrU-B10iH0UACQgexngvGsgnFMSl44HEGUYrB0DRlC3GeEu8cRgBzDQKVX439gISKgmsmREC0mgJSds5RFV9mAHJdjRAg0zXA%2BaUuMaDrlqUCcC46ZjKqPKsQ0jwxDSL%2BUYAACUsCFR4RKSXeJKSnGyrxHSAoqSwvSoLIJhK5OuVAsz3bjAgKXeFIjllIqkes2R%2BEMUarRXc2ldFAA8G4AI-2NHqDOP010jxzLSRuUEqp%2BqHl%2BUsVjRlxDpbPEdL1Z4XoaZCXOa8MMHMRW3JGWqqVtAAC%2B0reTW1jUKKWssFZKxVqqBQGpxB6z4JIVxPAuLyE1ooYQCBtCaDpjKBQmhXmaHUAISUmhFRSwhqcN0jo9h9IceGQASYQIAANVmtdOcS1%2Bw-Q-IjHxC5FkADdP4tgOi6IGLoCAm2ABQCaMzxYzxkTAtdMmZPQnF4gJIS1wE4zolKJOI%2BA6DmHwHEXUCBV1%2Bk9cmBApKzj3EoWJF4zwE7M0tnG-9tt7YkCdo4F2btPatEcGURISrqB3gRYBUOgAEXYQHwR0IYzjdJMv6bxnpjgtL%2BgDYG1MM50WLjnfOSwmBF3bMvculdXyjmLlffAAAWEiPR8BtzCBEEkZJgSUm4xCCIUI8gFHbIPVwW5vA%2BEgj4RckEmoQvXFPX4s8ETzxQIvEuZdV772rnvScUmZw%2BCQD4FYZmwRFGM9uNjHGuMTIQBepAJZKQoDAKVJZYjEVJK2WizZmLdXYq8iHQAiLumqEoOvibNv0pmDMpA4FlbXUugQ6vBDKcbEKma-ARCBCAQCwI4d%2BEBOz0AQNe29wa7U0r2Y66qTzrG43ui1bcB5j5Hh6MQ9a9xACKIDsb9joEBhhOKUvY4JzIDROCcE9pweqpyqyl8VYbwXStoEgErMB376hQHw1EgivOJNWX54BWr5E6qUfavZIdACHe4UxDdF1AlJODJE4ArHhJnjqNRg61JTJeGZdnFdXnX1My-RFaXEyubVWuCW0SAiLghAkRBb-3%2BYSvDQgKNf7-2xoTXLRWysVRqnVBmhA61ADkIIAQBAFDFu2FxJQAhpY8DJ0rLQWPsdW0Aw7WAiBQMF3dh7Owrt5jGn9vBlV3n7sh0AFM7pPev9YToNkypLHTHpfQgEyr3HiOPfYDPYpHyPi8o4XYudHYgVyrkx9sV9DxxEgh1oTHdSRAgpMkHuInaQwnE3eST05h5nzPq3ZTtBVMz1rBpheS9S4rw8GvAzEJ94sYCH4SCKwrPW4PLb%2B3jnbQQDAFaGoZQivKoST5o7gWTvpPL-RYLhkQ6ABUdjRHKQpK%2B8SrlSlKhmVJq4D9LLrQd0R4K6cyfKgw7EuJa8EKcjjgjDJ43RVNOb%2BN2lSlHrDluOcQnezzCG1UosUeis7qKLvd5C4ACZ2NGb7K%2B854i6W9OhEn9rvqXau95By8uifA3hpkAGwgjodgzaOGJX-3BEDHNTJWtX6QTmRyfyW3YRW3bEsCwDADKGLGK2L1VV8yrwC3O2rwBy8gNUAG39u7TiKacyTML0EaMrGGOGEaR-MVbJHvelPvd-V5UQOQcER9L1BaH6Gg6AsVEJMFTkSNaNRgdnADbkCURNfHFNInEnTQUQV5enRQJQdadQBQdaenNnMQ-MTnYDHnMDbAT2eYUIaAUXX8cXH%2BUOQAUt3ClkF%2BJLUR9Awx9XQBt1c3QfRSkoDKUyMA5DcC5qMTco96MLchMr47cDxIIOhaI3dMA%2BNndu5xx3c%2B4vd1wfdpNfB8AfAG5FwJ47wQ91MYgI8dNo9Y9d548jNfcZMEJZx8AUJL4bNvBwjIjaJHN8BDR893BiBp4d9MCcDsCj9cCT9a9AAhnY0UAFIQS1V4I4efMSCSKSfpBxOgvVF-Jgt-RpaWN0JXc1f0QbZmSYw4PYGY7UAANTh3TiX0RiBVX1gLGUc3IhQFfj7FiXQIl132OwP3eOWJxRDkAHOdjReWA4N4EMK4UmcmSmZMJYmvOlJ1OpZ5RpSCUgKAfsMrXUV2RARgK0AAWStD4JMQEMlXgMhQgEcDgBAFy0-h6LLz6NO0%2BKhP2UABHd4guiOmO4cyBxeMPpWLb6FmNmSEvA8xGEhrV1N5VxEKXIDoPwcEPYl4KmQbPwAAagQEpgGQuO5iuJgPxKlXbEgnwHtDhQO1L2RXeP6P3y%2BJC0AAudjRHgF0IdISBAemHgPkoY6E%2BrDLd-JQM4G4D5cycEN4V0RdeSPpXE0NOAoQjHDYLQ7QgsCQ2gLiHgBQHgLQBAOmAQUQCQMYvWQ2Y2BAQAFMIEAuIuABAFBXkeAlBNRIyoyRR9A8QCRfhrdG5m5W5qQIgr5chZxWMfADwWjlMthkE9hUERp9An4X434P4Qo6IApUCywKxv5UJtgZo0xbJHQ6AwwJtLgQxgxZjJI%2BllIAAdFwWgKaQMDw2af-HUUAi1K1aScEEyG4ESG85SHYd0L0M0fc%2B%2BQoIsEsachAcchAYc1%2BEsD%2BA7Oc3YPiS4EydXLRR4ayWyL0fc2gdxRcp4BAT5WYy1BSHYSSeC0nUEs4CmWUhAC4c4NMEbJXOgJSYMEMR0N8zhLYUhSyaCnRfRJMfQbhXhHbQRX8z80sdwGciwucqaXqWUvWeiqyDtJ8srHgTCxLV4J87CriD6UipcpaVaDaLaLibCumehR0cyPYN7IVIbDxLxHxehN4Gij8qc3in8icti-hfbWchC7lR4ZC1CsyBimCoVbC0QR4c4YlT5Ay8GcwOIV8g8-M%2BMDMV7R0b-eOAyi4C8-iI4JwwbUmV0JXJMcykQhAZpbxfQSJaJTiic7i784C2My1RxGyGmQAWRBAwNc3R9gwwdQTzHhyLMLQwQrHK1yNzRIyEyZHgnDF0Uqlc9gMraAiqrLfy8qYkIAXjYhHKkLRJUKTy9KO1PLQqSYyY8LwS9hBsLh-RHEUxBrQYMrLQTkzkLkrlWLplyhMB5kMBrLJyvyrKSqwqHE3RNz4xjyho5oHE1dADvqfRsLpYhoFrur90wKRqHqeLyx7qpkZkbqFlnrELnKQbTgBU3rLh5L4wfQE4hKDK-rlIEBAACsnyWOpjMJT8tJVtNdFYuhXmHurGuhueu8r5TOGjlEhEj6gGhkh9DoF6keDkhkocWwvWk1x9C2sG1Fo8WOHEm8UuG6R1EsFnBInapepMluDjG%2BlhjmkeAhoZvIF-KhRhRmrnMADQQcfT5A4TWmg0SbUEAUgUgMoOZOwHsFW9UP-EpDpJdIK7CgQSmV0M8uSdDTDaCnDfYUm%2BgRgM1S8iAnYHUNpeMYEh0i0Nba6wwhVJVLiyyxmhy-MxS0pL9UdcSbc6SRqvlR0d9R4GmcHFWs1a4HcnqUGOgV7JSCSO4BAS1EMf0dyuyN8yPXTc3RjMMvW%2B62VTAeVKARVUrZ6lk4u-pFC0SYi0iz0bUeO9De0hmFW0CsfCCtysSwVamXu4omIAevEWi0QysyWGM-M%2BMxM7QFMtM8QDM-Mws4s0szUXMwnNNYnCsi%2BwUTKkKAB1DIOrDUO5e7-HrS5BXKGABkKas-EaeFjdjJATjKzf4K%2BNrI8DrWKM%2BhAd6T6T0H6J0fpf6QGR4EGMGCGKGGMOMY4MGw9YSBOS0eSS1XRR4P-EyGmKMTgj1a4S4CMSLISaLP0PCvh%2BLCdMgwsLO-Wmy-AFzOZNwDzZ6riNG10Tcy4OXb9ZmT9RMH9bC9xZuiCtcqbNXKfR0FMc4LMDDGyXxOC0K5R161R0SbxMCkyUSdRvrf0FMYbUbCG5zVzBR%2BmqR422Mj6HYFK6KgiwhwjUh8h7CjgSbabSfVOcEPiEpOSWMBOTSguwbNMA4GmOQUWt9ShbqofRw5wzJ5IThYe389bTsTbFAbbXbZoaa56sYz1Lc%2BYgm7tRe0pT0cHNS1aTGhxzckyOqkhsRnUWHIiFW-RlOCCzxTC44H0DkqmHURHXUEK98-QWp%2BpxpvbaazOx67O-ikJki-OnRlMZmdpxU3qXpE4aMFZ14bCre8Ctw-28Z8dcOrYGB2XDxhXdXZXVXbUKig4HrAbaBgBuB2sn4dPTPOo4TTAVsxuVjVjHIqpoJ38nPPPAvIvZ6uQD5PY81YGjmQi0puMUfcfCpxygxl9N0HqVmfDQyufKmdKypwoLF-PWoIvQ5qGvihJOcwfYfclpw8fHW0KuxUAxxGg%2BhRl2fYy5xYatl6Vapicy-Z6ngZxmSKMOSL-X-Am84dXR890aiuxlRzc-GoW8Vx0T608pOC88A6SMVrZ2gS-Hl4qnOumbJ04C4fGjxZ5x815%2B1y1GOsV05sJt0CJgyhO9w5a-e2xrZyRo56RhARA5A1AoCnO6WBOTqzcng7W71wygxjG0KqSjRs4XDHUQSBhzZvuleE%2B4AMM1NlAwCg5wqoJxGnyuZ%2Be1Gja5xsWgiouzpy1qzU3etnBn5uwhw4V5wm2wR54X-bGx0CF2B2gGshBhorwJoqI1BlsjduIHoVjHoI9hN0ajFictoxwDo6AaFnO0haUj1Ayw6sGfid7S2xUq53qGZzt8tgt0iS9J9iGi9q9rowJpN4JhAV5V9hARUhZpynRk12gTQbxISamaMTYnupVxN3l%2B6%2B4x4kAeyk5%2BcuSBOfYQbbtbleMVx2OxU4MC27C4Fpy5CxgT5Xyj5ZSxgSqkyYMXiDmTZsM3DkAJ41tyG91wjl5iCmW5SH0DpcOlVpzYk0k3LJRlteawylK3qMFzRsSehbCyDpMN971s5pXaD1MP-ODgbXxhTskwkN1p6j1uYncl9YE%2BltmG2g14bOZy4Pj5TOTnU%2B0Z6pD2ONML0Zijpxz7tINq8-pYt6lrtzV8C7quSPpJ1sMvz0D7D566WILkLzpBzkupSfh6Ox17C9QDw5SZ4Eli4STrXQME1k9iOhAX%2B8WKWHwOIUBEiAAaTKzLQ4HpxTLrWVG1BOEuGeCcL0ojAcNi2Toa6a50NXfgbrI3eQZWEXA6HHmbMRY3dW7W46CbKPqYHrcZAvBZExB6E4VhtTtuvS9E-5doGJsmnUc8ejClaVLbX%2Bvo9e2OA9Uk7ltDuOE3xreszQCWGgHmGWFCEpFaDDMNrpts%2BOdu6JsKTsQrppiieIaIzIYPtCqG5KRQt7bHxOD%2B6c0vQqw2cPucGB5qCRMwCYAh5cCh9sCjSAA" width="1500px" height="1500px" style="border:0;" allowfullscreen="allowfullscreen"></iframe>
+**Название:** Платформа электронного документооборота и согласования.
+
+**Назначение:**
+Платформа предназначена для автоматизации полного жизненного цикла
+внутренних и внешних документов организации — от создания и согласования
+до подписания электронной подписью, обмена с контрагентами и передачи
+в долговременный архив.
+
+Платформа заменяет бумажный документооборот и разрозненные инструменты
+(электронная почта, общие сетевые папки, ручные журналы) единой системой
+с контролем версий, юридически значимыми подписями, прозрачным
+аудиторским следом и автоматической маршрутизацией задач.
+
+**Типы обрабатываемых документов:**
+
+- Договоры с контрагентами
+- Служебные записки
+- Заявки на оплату
+- Политики и положения (стратегические документы)
+- Иные внутренние документы, требующие согласования
+
+**Цель системы (миссия):**
+
+Обеспечить прозрачное, контролируемое и юридически значимое прохождение
+документов от момента создания до архивации — так, чтобы:
+
+1. Каждый участник маршрута согласования видел актуальный статус документа,
+   историю версий и принятые решения.
+2. Сроки согласования контролировались автоматически с эскалацией
+   просроченных задач.
+3. Электронные подписи (Квалифицированная Электронная Подпись и Усиленная
+   Неквалифицированная Электронная Подпись) обеспечивали юридическую
+   значимость документов.
+4. Обмен документами с контрагентами происходил через оператора
+   электронного документооборота с встречной подписью.
+5. Неизменяемый аудиторский след позволял восстановить полную картину
+   событий при проверке или судебном споре.
+6. Система продолжала работать при временной недоступности внешних систем
+   в режиме деградации с последующей синхронизацией.
+7. Сотрудники могли согласовывать срочные документы с мобильных устройств
+   вне офиса.
+
+---
+
+### 1.2 Границы системы
+
+**Входит в границы платформы:**
+
+- Создание, хранение и версионирование карточек документов и файлов
+- Маршрутизация задач согласования (последовательная и параллельная)
+- Наложение и проверка электронных подписей
+- Контроль сроков согласования, напоминания и эскалация
+- Коллегиальное согласование с агрегацией голосов
+- Проверка бюджетных лимитов при заявках на оплату
+- Формирование неизменяемого журнала аудита
+- Отправка и приём документов через оператора электронного документооборота
+- Передача завершённых дел в долговременный архив
+- Мобильный интерфейс для просмотра и согласования
+- Управление ролями, шаблонами маршрутов и справочниками
+
+**Не входит в границы платформы (внешние системы):**
+
+- Хранение учётных записей сотрудников — корпоративная служба каталогов
+- Ведение кадровой структуры — система управления персоналом
+- Бюджетирование и бухгалтерский учёт — система управления ресурсами
+  предприятия
+- Удостоверяющий центр и криптографические операции — криптопровайдер
+- Юридически значимая доставка документов контрагентам — внешний оператор
+  электронного документооборота
+- Физическая доставка уведомлений — внешний шлюз уведомлений
+- Долговременное хранение (5 и более лет) — внешний долговременный архив
+- Ведение справочника контрагентов — система управления ресурсами
+  предприятия / клиентская база
+
+---
+
+### 1.3 Внешние сущности и потоки данных
+
+#### Пользователи (роли)
+
+| Внешняя сущность | Направление | Данные / события |
+|---|---|---|
+| **Инициатор** | → Платформа | Карточка документа (реквизиты, файл), запуск маршрута, загрузка новой версии, повторная отправка после доработки |
+| **Инициатор** | ← Платформа | Статус документа, уведомления о согласовании / отклонении / подписании, протокол голосования |
+| **Согласующий** | → Платформа | Решение (согласовать / отклонить / делегировать), голос (за / против / воздержался), комментарий, загрузка версии |
+| **Согласующий** | ← Платформа | Задача на согласование (документ, версии, комментарии предыдущих участников), напоминания, результат голосования |
+| **Юрист** | → Платформа | Правки документа (новая версия с комментарием), решение (согласовать / отклонить), запрос акта аудита |
+| **Юрист** | ← Платформа | Задача на проверку, история версий, результат проверки подписи, акт аудита в формате переносимого документа |
+| **Бухгалтер** | → Платформа | Решение по заявке (исполнить / отклонить), ручное подтверждение лимита |
+| **Бухгалтер** | ← Платформа | Задача с реквизитами контрагента и информацией о лимитах, пометка «Проверить лимиты вручную» |
+| **Администратор** | → Платформа | Настройка маршрутов, шаблонов, ролей, прав доступа, ручная аутентификация пользователей |
+| **Администратор** | ← Платформа | Журнал аудита, статус внешних систем, отчёт по уровню сервиса, оповещения о нарушении целостности |
+| **Контрагент** | → Платформа (через оператора электронного документооборота) | Встречная Квалифицированная Электронная Подпись, протокол разногласий |
+| **Контрагент** | ← Платформа (через оператора электронного документооборота) | Подписанный документ |
+
+#### Внешние системы
+
+| Внешняя сущность | Направление | Данные / события |
+|---|---|---|
+| **Корпоративная служба каталогов** | → Платформа | Результат проверки учётных данных (успех / отказ), роли, группы пользователя |
+| **Корпоративная служба каталогов** | ← Платформа | Запрос на проверку учётных данных при входе пользователя |
+| **Система управления персоналом** | → Платформа | Данные сотрудников, ролей, иерархии, замещений (периодическая синхронизация) |
+| **Система управления персоналом** | ← Платформа | Запрос на синхронизацию справочника организационной структуры |
+| **Система управления ресурсами предприятия** | → Платформа | Остаток бюджета по статье расходов, лимит договора, статус и реквизиты контрагента |
+| **Система управления ресурсами предприятия** | ← Платформа | Запрос на проверку лимитов, запрос статуса контрагента, команда на списание суммы из лимита |
+| **Криптопровайдер** | → Платформа | Подписанная контрольная сумма, штамп времени, результат проверки статуса сертификата (действителен / отозван / истёк) |
+| **Криптопровайдер** | ← Платформа | Контрольная сумма файла для подписания, запрос на проверку статуса сертификата |
+| **Оператор электронного документооборота** | → Платформа | Квитанция об отправке, подписанный контрагентом экземпляр, протокол разногласий |
+| **Оператор электронного документооборота** | ← Платформа | Подписанный документ для отправки контрагенту |
+| **Шлюз уведомлений** | → Платформа | Подтверждение приёма уведомления шлюзом |
+| **Шлюз уведомлений** | ← Платформа | Уведомления (электронная почта, push-уведомления, короткие текстовые сообщения) |
+| **Долговременный архив** | → Платформа | Квитанция о приёме дела (идентификатор дела, контрольная сумма), запрашиваемые архивные документы |
+| **Долговременный архив** | ← Платформа | Завершённое дело (файлы всех версий, подписи, метаданные карточки, лента аудита), запрос на извлечение документа |
+
+---
+
+### 1.4 Контекстная диаграмма
+
+```plantuml
+@startuml
+skinparam defaultFontSize 12
+skinparam padding 8
+skinparam nodesep 80
+skinparam ranksep 100
+skinparam rectangleBorderColor #555555
+skinparam actorBorderColor #555555
+skinparam backgroundColor #FEFEFE
+
+title Контекстная диаграмма\nПлатформа электронного документооборота и согласования\n
+
+' ===== ЦЕНТР =====
+
+rectangle "<<Система>>\n\nПлатформа электронного\nдокументооборота\nи согласования" as SYS #LightBlue;line:Navy;text:Navy
+
+' ===== ПОЛЬЗОВАТЕЛИ =====
+
+actor "Инициатор" as INIT
+actor "Согласующий" as APPR
+actor "Юрист" as LAW
+actor "Бухгалтер" as ACC
+actor "Администратор" as ADM
+
+' ===== ВНЕШНИЕ СИСТЕМЫ =====
+
+rectangle "<<Внешняя система>>\nКорпоративная\nслужба каталогов" as LDAP #FFFFDD
+rectangle "<<Внешняя система>>\nСистема управления\nперсоналом" as HR #FFFFDD
+rectangle "<<Внешняя система>>\nСистема управления\nресурсами предприятия" as ERP #FFFFDD
+rectangle "<<Внешняя система>>\nКриптопровайдер" as CRYPTO #FFFFDD
+rectangle "<<Внешняя система>>\nОператор электронного\nдокументооборота" as EDO #FFFFDD
+rectangle "<<Внешняя система>>\nШлюз уведомлений" as NOTIF #FFFFDD
+rectangle "<<Внешняя система>>\nДолговременный архив" as ARCH #FFFFDD
+rectangle "<<Внешняя сторона>>\nКонтрагент" as CONTR #FFE4E1
+
+' ===== РАСПОЛОЖЕНИЕ =====
+
+INIT -[hidden]down- APPR
+APPR -[hidden]down- LAW
+LAW -[hidden]down- ACC
+ACC -[hidden]down- ADM
+
+LDAP -[hidden]down- HR
+HR -[hidden]down- ERP
+ERP -[hidden]down- CRYPTO
+
+EDO -[hidden]right- NOTIF
+NOTIF -[hidden]right- ARCH
+ARCH -[hidden]right- CONTR
+
+' ===== ПОТОКИ: ПОЛЬЗОВАТЕЛИ =====
+
+INIT -right-> SYS : Карточка, файл,\nзапуск маршрута
+SYS -left-> INIT : Статус, уведомления
+
+APPR -right-> SYS : Решение, голос
+SYS -left-> APPR : Задача, напоминания
+
+LAW -right-> SYS : Правки, решение
+SYS -left-> LAW : Версии, акт аудита
+
+ACC -right-> SYS : Решение,\nподтверждение лимита
+SYS -left-> ACC : Задача, лимиты
+
+ADM -right-> SYS : Настройки ролей,\nмаршрутов
+SYS -left-> ADM : Аудит, оповещения
+
+' ===== ПОТОКИ: ВНЕШНИЕ СИСТЕМЫ (справа) =====
+
+SYS -right-> LDAP : Запрос аутентификации
+LDAP -left-> SYS : Токен, роли
+
+SYS -right-> HR : Запрос синхронизации
+HR -left-> SYS : Оргструктура
+
+SYS -right-> ERP : Запрос лимитов
+ERP -left-> SYS : Бюджет, реквизиты
+
+SYS -right-> CRYPTO : Подписание,\nпроверка сертификата
+CRYPTO -left-> SYS : Подпись, штамп,\nстатус
+
+' ===== ПОТОКИ: ВНЕШНИЕ СИСТЕМЫ (снизу) =====
+
+SYS -down-> EDO : Подписанный документ
+EDO -up-> SYS : Квитанция,\nвстречная подпись
+
+EDO -down-> CONTR : Документ контрагенту
+CONTR -up-> EDO : Встречная подпись
+
+SYS -down-> NOTIF : Уведомления
+NOTIF -up-> SYS : Подтверждение приёма
+
+SYS -down-> ARCH : Завершённое дело
+ARCH -up-> SYS : Квитанция, документы
+
+@enduml
+
+```
+
+---
+
+### 1.5 Ключевые ограничения и допущения
+
+**Ограничения:**
+
+1. Платформа не является системой долговременного хранения —
+   ответственность за обеспечение сроков хранения (5 и более лет)
+   несёт внешний Долговременный архив.
+2. Платформа не выпускает сертификаты электронной подписи —
+   все криптографические операции выполняются через внешний
+   криптопровайдер (удостоверяющий центр).
+3. Платформа не ведёт справочник контрагентов — реквизиты и статус
+   контрагентов запрашиваются из системы управления ресурсами
+   предприятия.
+4. Платформа не осуществляет прямую доставку электронной почты,
+   push-уведомлений и коротких текстовых сообщений — используется
+   внешний шлюз уведомлений.
+5. Физическая доставка документа контрагенту осуществляется через
+   внешнего оператора электронного документооборота — платформа
+   отвечает за формирование и передачу документа оператору.
+
+**Допущения:**
+
+1. Корпоративная служба каталогов содержит актуальные учётные записи
+   всех сотрудников организации.
+2. Система управления персоналом отражает текущую организационную
+   структуру, включая замещения.
+3. Криптопровайдер поддерживает протокол онлайн-проверки статуса
+   сертификата и выдачу штампов времени.
+4. Оператор электронного документооборота обеспечивает роуминг
+   с операторами контрагентов.
+5. Внешний шлюз уведомлений поддерживает отправку по электронной почте,
+   push-уведомлений и коротких текстовых сообщений.
+6. Долговременный архив обеспечивает сохранность данных в течение
+   установленного срока и поддерживает извлечение по идентификатору дела.
